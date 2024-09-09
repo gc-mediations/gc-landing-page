@@ -1,18 +1,28 @@
-import { Combobox } from "@/components/ui/combobox.tsx";
-import { locations } from "@/static-data/locations.ts";
-import { useMapStore } from "@/store/map-store.ts";
-import type { Location } from "@/types/location.ts";
-import { createLazyFileRoute } from "@tanstack/react-router";
-import { useEffect } from "react";
-import { MapContainer, Marker, Popup, TileLayer, useMap } from "react-leaflet";
+import {Combobox} from "@/components/ui/combobox.tsx";
+import {locations} from "@/static-data/locations.ts";
+import {useMapStore} from "@/store/map-store.ts";
+import type {Location} from "@/types/location.ts";
+import {createLazyFileRoute} from "@tanstack/react-router";
+import type {LatLngExpression} from "leaflet";
+import {useEffect} from "react";
+import {MapContainer, Marker, Popup, TileLayer, useMap} from "react-leaflet";
 
 export const Route = createLazyFileRoute("/contacts/")({
 	component: Contacts,
 });
 
+function MapController({ center }: { center: LatLngExpression }) {
+	const map = useMap();
+
+	useEffect(() => {
+		map.setView(center, 13);
+	}, [center, map]);
+
+	return null;
+}
+
 function Contacts() {
 	const { coordinates, setCoordinates } = useMapStore();
-	const map = useMap();
 
 	const comboboxData = locations.map((location) => ({
 		label: location.name,
@@ -20,12 +30,8 @@ function Contacts() {
 		action: () => setCoordinates(location.coordinates),
 	}));
 
-	useEffect(() => {
-		map.setView(coordinates, 13);
-	}, [coordinates, map]);
-
 	return (
-		<div className={"px-8"}>
+		<>
 			<Combobox data={comboboxData} placeholder="Seleziona una sede" />
 			<div className="flex flex-col justify-center pt-2">
 				<MapContainer
@@ -43,8 +49,9 @@ function Contacts() {
 							<Popup>{location.address}</Popup>
 						</Marker>
 					))}
+					<MapController center={coordinates} />
 				</MapContainer>
 			</div>
-		</div>
+		</>
 	);
 }

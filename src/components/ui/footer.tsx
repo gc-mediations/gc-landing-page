@@ -1,8 +1,8 @@
 "use client";
 
-import { socials } from "@/static-data/socials.tsx";
-import { nanoid } from "nanoid";
-import { type SetStateAction, useState } from "react";
+import {socials} from "@/static-data/socials.tsx";
+import {nanoid} from "nanoid";
+import {type SetStateAction, useState} from "react";
 
 export const Footer = () => {
 	const [copiedIndex, setCopiedIndex] = useState(-1);
@@ -24,7 +24,7 @@ export const Footer = () => {
 		}
 	};
 	return (
-		<footer className="bg-muted p-4 md:py-10 w-full">
+		<footer className="bg-muted p-4 md:py-6 w-full">
 			<div className="container max-w-7xl flex justify-between items-center mx-auto ">
 				<div className="text-sm text-muted-foreground">
 					&copy; 2024 Mediazioni Gaetano Castiglia. Tutti i diritti riservati.
