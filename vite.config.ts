@@ -12,10 +12,14 @@ export default defineConfig({
 			generatedRouteTree: "./src/routeTree.gen.ts",
 		}),
 	],
-
 	resolve: {
 		alias: {
 			"@": path.resolve(__dirname, "./src"),
+		},
+	},
+	build: {
+		rollupOptions: {
+			external: "src/assets/images/trees.png",
 		},
 	},
 });

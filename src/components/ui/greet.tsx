@@ -7,14 +7,15 @@ interface GreetProps {
 		label: string;
 		link: string;
 	};
+	image: string;
 }
 
-export const Greet = ({ title, description, action }: GreetProps) => {
+export const Greet = ({ title, description, action, image }: GreetProps) => {
 	return (
 		<div className="container mx-auto px-4 py-12 md:py-24 grid grid-cols-1 md:grid-cols-2 gap-8">
 			<div className="flex items-center justify-center">
 				<img
-					src="/placeholder.svg"
+					src={image}
 					alt="Greet"
 					className="w-full max-w-[400px] aspect-square rounded-lg object-cover"
 					width="400"
