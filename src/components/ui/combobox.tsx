@@ -28,12 +28,12 @@ export function Combobox({ data, placeholder }: ComboboxProps) {
 
 	return (
 		<Popover open={open} onOpenChange={setOpen}>
-			<PopoverTrigger asChild>
+			<PopoverTrigger asChild className={"mb-2"}>
 				<Button
 					variant="outline"
 					role="combobox"
 					aria-expanded={open}
-					className="w-[200px] justify-between"
+					className="w-[200px] justify-between shadow-lg"
 				>
 					{value
 						? data.find((item) => item.value === value)?.label
