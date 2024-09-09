@@ -19,7 +19,7 @@ export default defineConfig({
 	},
 	build: {
 		rollupOptions: {
-			external: "src/assets/images/trees.png",
+			external: [/^src\/assets\/images\/.+/],
 		},
 	},
 });
