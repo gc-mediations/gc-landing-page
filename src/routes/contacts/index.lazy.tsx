@@ -1,11 +1,11 @@
-import {Combobox} from "@/components/ui/combobox.tsx";
-import {locations} from "@/static-data/locations.ts";
-import {useMapStore} from "@/store/map-store.ts";
-import type {Location} from "@/types/location.ts";
-import {createLazyFileRoute} from "@tanstack/react-router";
-import type {LatLngExpression} from "leaflet";
-import {useEffect} from "react";
-import {MapContainer, Marker, Popup, TileLayer, useMap} from "react-leaflet";
+import { Combobox } from "@/components/ui/combobox.tsx";
+import { locations } from "@/static-data/locations.ts";
+import { useMapStore } from "@/store/map-store.ts";
+import type { Location } from "@/types/location.ts";
+import { createLazyFileRoute } from "@tanstack/react-router";
+import type { LatLngExpression } from "leaflet";
+import { useEffect } from "react";
+import { MapContainer, Marker, Popup, TileLayer, useMap } from "react-leaflet";
 
 export const Route = createLazyFileRoute("/contacts/")({
 	component: Contacts,

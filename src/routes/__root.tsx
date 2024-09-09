@@ -1,8 +1,8 @@
-import {Footer} from "@/components/ui/footer.tsx";
-import {Header} from "@/components/ui/header.tsx";
-import {createRootRoute, Outlet} from "@tanstack/react-router";
-import {TanStackRouterDevtools} from "@tanstack/router-devtools";
-import {motion} from "framer-motion";
+import { Footer } from "@/components/ui/footer.tsx";
+import { Header } from "@/components/ui/header.tsx";
+import { Outlet, createRootRoute } from "@tanstack/react-router";
+import { TanStackRouterDevtools } from "@tanstack/router-devtools";
+import { motion } from "framer-motion";
 
 export const Route = createRootRoute({
 	component: () => (

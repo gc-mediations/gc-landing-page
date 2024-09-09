@@ -1,8 +1,8 @@
 "use client";
 
-import {socials} from "@/static-data/socials.tsx";
-import {nanoid} from "nanoid";
-import {type SetStateAction, useState} from "react";
+import { socials } from "@/static-data/socials.tsx";
+import { nanoid } from "nanoid";
+import { type SetStateAction, useState } from "react";
 
 export const Footer = () => {
 	const [copiedIndex, setCopiedIndex] = useState(-1);
