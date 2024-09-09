@@ -1,33 +1,50 @@
+import { Combobox } from "@/components/ui/combobox.tsx";
+import { locations } from "@/static-data/locations.ts";
+import { useMapStore } from "@/store/map-store.ts";
+import type { Location } from "@/types/location.ts";
 import { createLazyFileRoute } from "@tanstack/react-router";
-import { motion } from "framer-motion";
-import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet";
+import { useEffect } from "react";
+import { MapContainer, Marker, Popup, TileLayer, useMap } from "react-leaflet";
 
 export const Route = createLazyFileRoute("/contacts/")({
 	component: Contacts,
 });
 
 function Contacts() {
+	const { coordinates, setCoordinates } = useMapStore();
+	const map = useMap();
+
+	const comboboxData = locations.map((location) => ({
+		label: location.name,
+		value: location.name,
+		action: () => setCoordinates(location.coordinates),
+	}));
+
+	useEffect(() => {
+		map.setView(coordinates, 13);
+	}, [coordinates, map]);
+
 	return (
-		<motion.div
-			className={"flex flex-col justify-center"}
-			whileHover={{ scale: 1.01 }}
-		>
-			<MapContainer
-				className={"h-[600px] w-auto justify-center px-2"}
-				center={[37.515832284824896, 15.077880215746394]}
-				zoom={13}
-				scrollWheelZoom={false}
-			>
-				<TileLayer
-					attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-					url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-				/>
-				<Marker position={[37.515832284824896, 15.077880215746394]}>
-					<Popup>
-						REMAX Platinum: Via Cesare Beccaria, 67, 95123 Catania CT
-					</Popup>
-				</Marker>
-			</MapContainer>
-		</motion.div>
+		<div className={"px-8"}>
+			<Combobox data={comboboxData} placeholder="Seleziona una sede" />
+			<div className="flex flex-col justify-center pt-2">
+				<MapContainer
+					className="h-[600px] w-auto justify-center px-2 rounded-md"
+					center={coordinates}
+					zoom={13}
+					scrollWheelZoom
+				>
+					<TileLayer
+						attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+						url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+					/>
+					{locations.map((location: Location) => (
+						<Marker key={location.name} position={location.coordinates}>
+							<Popup>{location.address}</Popup>
+						</Marker>
+					))}
+				</MapContainer>
+			</div>
+		</div>
 	);
 }

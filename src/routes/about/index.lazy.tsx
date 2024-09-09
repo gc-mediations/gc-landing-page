@@ -1,4 +1,5 @@
 import { Timeline } from "@/components/ui/timeline.tsx";
+import { landmarks } from "@/static-data/landmarks.ts";
 import { createLazyFileRoute } from "@tanstack/react-router";
 
 export const Route = createLazyFileRoute("/about/")({
@@ -6,5 +7,11 @@ export const Route = createLazyFileRoute("/about/")({
 });
 
 function About() {
-	return <Timeline />;
+	return (
+		<Timeline
+			title={"In sintesi"}
+			subtitle={"La mia storia"}
+			landmarks={landmarks}
+		/>
+	);
 }

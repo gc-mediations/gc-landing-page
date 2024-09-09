@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils.ts";
 import { sections } from "@/static-data/sections.ts";
 import { Link, useLocation } from "@tanstack/react-router";
-import { GlassesIcon, MenuIcon } from "lucide-react";
+import { MenuIcon } from "lucide-react";
 
 export const Header = () => {
 	const location = useLocation();

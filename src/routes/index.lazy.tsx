@@ -1,6 +1,6 @@
-import {Greet} from "@/components/ui/greet";
-import {createLazyFileRoute} from "@tanstack/react-router";
-import {motion} from "framer-motion";
+import { Greet } from "@/components/ui/greet";
+import { createLazyFileRoute } from "@tanstack/react-router";
+import { motion } from "framer-motion";
 
 export const Route = createLazyFileRoute("/")({
 	component: Index,
@@ -11,7 +11,7 @@ function Index() {
 		<motion.div
 			transition={{ duration: 1.0 }}
 			whileHover={{ scale: 1.01 }}
-			className={"bg-muted rounded-md"}
+			className={"bg-muted rounded-md px-8"}
 		>
 			<Greet
 				title={"Pluripremiato consulente del credito"}
