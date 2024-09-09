@@ -3,6 +3,7 @@ import { locations } from "@/static-data/locations.ts";
 import { useMapStore } from "@/store/map-store.ts";
 import type { Location } from "@/types/location.ts";
 import { createLazyFileRoute } from "@tanstack/react-router";
+import { motion } from "framer-motion";
 import type { LatLngExpression } from "leaflet";
 import { useEffect } from "react";
 import { MapContainer, Marker, Popup, TileLayer, useMap } from "react-leaflet";
@@ -31,7 +32,12 @@ function Contacts() {
 	}));
 
 	return (
-		<>
+		<motion.div
+			initial={{ y: 300, opacity: 0 }}
+			animate={{ y: 0, opacity: 1 }}
+			exit={{ y: -100, opacity: 0 }}
+			transition={{ duration: 0.3 }}
+		>
 			<Combobox data={comboboxData} placeholder="Seleziona una sede" />
 			<div className="flex flex-col justify-center pt-2">
 				<MapContainer
@@ -52,6 +58,6 @@ function Contacts() {
 					<MapController center={coordinates} />
 				</MapContainer>
 			</div>
-		</>
+		</motion.div>
 	);
 }
