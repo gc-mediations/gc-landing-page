@@ -12,7 +12,7 @@ export const Route = createRootRoute({
 				<AnimatePresence>
 					<motion.div
 						transition={{ duration: 1.0 }}
-						whileHover={{ scale: 1.005 }}
+						whileHover={{ scale: 1.001 }}
 						className="bg-muted rounded-md px-8 h-full overflow-auto"
 					>
 						<Outlet />

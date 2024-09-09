@@ -37,11 +37,12 @@ function Contacts() {
 			animate={{ y: 0, opacity: 1 }}
 			exit={{ y: -100, opacity: 0 }}
 			transition={{ duration: 0.3 }}
+			className={"p-4"}
 		>
 			<Combobox data={comboboxData} placeholder="Seleziona una sede" />
 			<div className="flex flex-col justify-center pt-2">
 				<MapContainer
-					className="h-[600px] w-auto justify-center px-2 rounded-md"
+					className="h-[600px] w-auto justify-center rounded-md"
 					center={coordinates}
 					zoom={13}
 					scrollWheelZoom
