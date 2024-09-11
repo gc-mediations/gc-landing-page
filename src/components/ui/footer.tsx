@@ -1,26 +1,24 @@
 "use client";
 
+import { toast } from "@/hooks/use-toast.ts";
 import { socials } from "@/static-data/socials.tsx";
+import { motion } from "framer-motion";
+import { CopyIcon } from "lucide-react";
 import { nanoid } from "nanoid";
-import { type SetStateAction, useState } from "react";
+import type { SetStateAction } from "react";
 
 export const Footer = () => {
-	const [copiedIndex, setCopiedIndex] = useState(-1);
-	const [showCopiedPopup, setShowCopiedPopup] = useState(false);
 	const handleCopy = async (
 		index: SetStateAction<number>,
+		title: string | undefined,
 		label: string | undefined,
 	) => {
 		if (index === 0 || index === 1) {
-			if (typeof label === "string") {
-				await navigator.clipboard.writeText(label);
-			}
-			setCopiedIndex(index);
-			setShowCopiedPopup(true);
-			setTimeout(() => {
-				setCopiedIndex(-1);
-				setShowCopiedPopup(false);
-			}, 2000);
+			if (!label) return;
+			await navigator.clipboard.writeText(label);
+			toast({
+				title: `${title} copiato/a! `,
+			});
 		}
 	};
 	return (
@@ -31,23 +29,36 @@ export const Footer = () => {
 				</div>
 				<div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4 text-sm relative">
 					{socials.map((social, index) => (
-						// biome-ignore lint/a11y/useKeyWithClickEvents: <explanation>
-						<div
+						<motion.div
 							key={nanoid()}
-							className="flex items-center justify-center gap-0.5 group hover:bg-gray-300 rounded-md p-1 hover:cursor-pointer"
-							onClick={() => {
-								social.link
-									? window.open(social.link)
-									: handleCopy(index, social.label);
-							}}
+							whileHover={{ scale: 1.1 }}
+							className="relative"
 						>
-							{showCopiedPopup && copiedIndex === index && (
-								<div className="absolute bg-primary text-primary-foreground px-2 py-1 rounded-md text-xs -top-8">
-									Copiato!
+							{/* biome-ignore lint/a11y/useKeyWithClickEvents: <explanation> */}
+							<div
+								className="flex items-center justify-center gap-0.5 group hover:bg-gray-300 rounded-md p-1 opacity-70 hover:opacity-100 transition-all ease-in-out duration-300 hover:cursor-pointer"
+								onClick={() => {
+									social.link
+										? window.open(social.link)
+										: handleCopy(index, social.title, social.label);
+								}}
+							>
+								{social.icon}
+							</div>
+
+							{!social.link && (
+								// biome-ignore lint/a11y/useKeyWithClickEvents: <explanation>
+								<div
+									className="absolute top-0 right-0 p-1 bg-white rounded-full shadow-md hover:bg-gray-100 cursor-pointer"
+									onClick={async (e) => {
+										e.stopPropagation();
+										await handleCopy(index, social.title, social.link);
+									}}
+								>
+									<CopyIcon size={8} />
 								</div>
 							)}
-							{social.icon}
-						</div>
+						</motion.div>
 					))}
 				</div>
 			</div>

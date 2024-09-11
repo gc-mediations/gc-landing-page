@@ -39,9 +39,9 @@ function Contacts() {
 			animate={{ y: 0, opacity: 1 }}
 			exit={{ y: -100, opacity: 0 }}
 			transition={{ duration: 0.3 }}
-			className="p-4 h-[calc(100vh-2rem)]"
+			className="p-4 h-[calc(90vh-2rem)]"
 		>
-			<div className="flex gap-4 h-[800px]">
+			<div className="flex gap-4 h-[600px]">
 				<div className="w-2/3 bg-primary-foreground rounded-md px-4 relative shadow-sm flex flex-col pb-4">
 					<p className="text-lg font-semibold py-2">Sedi lavorative</p>
 					<div className="absolute top-14 left-20 z-[1000] w-64">
