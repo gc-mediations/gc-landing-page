@@ -1,8 +1,8 @@
 import Reviews from "@/components/ui/reviews.tsx";
-import {Timeline} from "@/components/ui/timeline.tsx";
-import {landmarks} from "@/static-data/landmarks.ts";
-import {createLazyFileRoute} from "@tanstack/react-router";
-import {motion} from "framer-motion";
+import { Timeline } from "@/components/ui/timeline.tsx";
+import { landmarks } from "@/static-data/landmarks.ts";
+import { createLazyFileRoute } from "@tanstack/react-router";
+import { motion } from "framer-motion";
 
 export const Route = createLazyFileRoute("/about/")({
 	component: About,

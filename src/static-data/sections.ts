@@ -1,4 +1,4 @@
-import type {Section} from "../types/section.ts";
+import type { Section } from "../types/section.ts";
 
 export const sections: Section[] = [
 	{ label: "Home", link: "/" },

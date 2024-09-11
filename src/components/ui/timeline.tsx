@@ -1,9 +1,9 @@
-import type {Landmark} from "@/types/landmark";
-import {motion, useAnimation} from "framer-motion";
-import {ArrowRight, ChevronLeft, ChevronRight} from "lucide-react";
-import {nanoid} from "nanoid";
+import type { Landmark } from "@/types/landmark";
+import { motion, useAnimation } from "framer-motion";
+import { ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
+import { nanoid } from "nanoid";
 import type React from "react";
-import {useEffect, useRef} from "react";
+import { useEffect, useRef } from "react";
 
 interface TimelineProps {
 	title?: string;
