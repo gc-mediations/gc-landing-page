@@ -1,4 +1,4 @@
-import image from "@/assets/images/trees.png";
+import trees from "@/assets/images/trees.png";
 import { Greet } from "@/components/ui/greet";
 import { createLazyFileRoute } from "@tanstack/react-router";
 import { motion } from "framer-motion";
@@ -16,7 +16,7 @@ function Index() {
 			transition={{ duration: 0.3 }}
 		>
 			<Greet
-				image={image}
+				image={trees}
 				title={"Pluripremiato consulente del credito"}
 				description={
 					"Offro consulenza e assistenza per l'ottenimento di prestiti personali, prestiti auto, prestiti casa, prestiti per studenti, prestiti per imprese e molto altro. Contattami per una consulenza gratuita e senza impegno."
