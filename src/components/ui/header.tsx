@@ -1,4 +1,9 @@
-import { Button } from "@/components/ui/button";
+import {
+	DropdownMenu,
+	DropdownMenuContent,
+	DropdownMenuItem,
+	DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu.tsx";
 import { cn } from "@/lib/utils.ts";
 import { sections } from "@/static-data/sections.ts";
 import { Link, useLocation } from "@tanstack/react-router";
@@ -46,7 +51,6 @@ export const Header = () => {
 						<li key={section.label}>
 							<Link
 								to={section.link}
-								// className="text-sm font-medium transition-colors hover:text-primary"
 								className={cn(
 									location.pathname === section.link
 										? "text-primary"
@@ -61,10 +65,28 @@ export const Header = () => {
 				</ul>
 			</nav>
 			<div className="md:hidden">
-				<Button variant="ghost" size="icon">
-					<MenuIcon className="h-6 w-6" />
-					<span className="sr-only">Toggle menu</span>
-				</Button>
+				<DropdownMenu>
+					<DropdownMenuTrigger asChild>
+						<MenuIcon className="h-6 w-6" />
+					</DropdownMenuTrigger>
+					<DropdownMenuContent align="end" className="w-36 z-[1005]">
+						{sections.map((section) => (
+							<DropdownMenuItem key={section.label}>
+								<Link
+									to={section.link}
+									className={cn(
+										location.pathname === section.link
+											? "text-primary"
+											: "text-foreground",
+										"w-full text-sm",
+									)}
+								>
+									{section.label}
+								</Link>
+							</DropdownMenuItem>
+						))}
+					</DropdownMenuContent>
+				</DropdownMenu>
 			</div>
 		</header>
 	);

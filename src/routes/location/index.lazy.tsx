@@ -4,22 +4,30 @@ import {
 	AccordionContent,
 	AccordionItem,
 	AccordionTrigger,
-} from "@/components/ui/accordion.tsx";
-import { Combobox } from "@/components/ui/combobox.tsx";
-import List from "@/components/ui/list.tsx";
-import { Separator } from "@/components/ui/separator.tsx";
-import { toast } from "@/hooks/use-toast.ts";
-import { cn } from "@/lib/utils.ts";
-import { contacts } from "@/static-data/contacts.ts";
-import { locations } from "@/static-data/locations.ts";
-import { useMapStore } from "@/store/map-store.ts";
-import type { Location } from "@/types/location.ts";
+} from "@/components/ui/accordion";
+import { Button } from "@/components/ui/button";
+import { Combobox } from "@/components/ui/combobox";
+import {
+	DropdownMenu,
+	DropdownMenuContent,
+	DropdownMenuItem,
+	DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import List from "@/components/ui/list";
+import { Separator } from "@/components/ui/separator";
+import { toast } from "@/hooks/use-toast";
+import { cn } from "@/lib/utils";
+import { contacts } from "@/static-data/contacts";
+import { locations } from "@/static-data/locations";
+import { useMapStore } from "@/store/map-store";
+import type { Location } from "@/types/location";
 import { createLazyFileRoute } from "@tanstack/react-router";
 import { motion } from "framer-motion";
 import type { LatLngExpression } from "leaflet";
 import L from "leaflet";
-import { InfoIcon, MenuIcon } from "lucide-react";
-import { useEffect } from "react";
+import { InfoIcon, MapPinIcon, MenuIcon } from "lucide-react";
+import { nanoid } from "nanoid";
+import { useEffect, useState } from "react";
 import {
 	MapContainer,
 	Marker,
@@ -44,6 +52,16 @@ function MapController({ center }: { center: LatLngExpression }) {
 
 function Contacts() {
 	const { coordinates, setCoordinates } = useMapStore();
+	const [isMobile, setIsMobile] = useState(false);
+
+	useEffect(() => {
+		const checkMobile = () => {
+			setIsMobile(window.innerWidth < 768);
+		};
+		checkMobile();
+		window.addEventListener("resize", checkMobile);
+		return () => window.removeEventListener("resize", checkMobile);
+	}, []);
 
 	const comboboxData = locations.map((location) => ({
 		label: location.name,
@@ -69,10 +87,11 @@ function Contacts() {
 		>
 			<div
 				className={cn(
-					"absolute lg:top-8 sm:bottom-8 md:bottom-8 left-1/2 transform -translate-x-1/2 z-[1001] w-1/2",
+					"absolute lg:top-8 sm:bottom-8 md:bottom-8 left-1/2 transform -translate-x-1/2 z-[1001] w-full max-w-lg pointer-events-none",
+					isMobile ? "hidden" : "block",
 				)}
 			>
-				<div className="bg-white rounded-lg shadow-lg px-2 py-4 text-center">
+				<div className="bg-white rounded-lg shadow-lg px-2 py-4 text-center pointer-events-auto">
 					<p className="font-bold text-2xl mb-1">Quale ufficio preferisci?</p>
 					<p className="text-muted-foreground text-sm">
 						Più sedi disponibili. Flessibilità e dinamicità garantite.
@@ -81,24 +100,70 @@ function Contacts() {
 			</div>
 
 			<div className="relative h-full bg-primary-foreground rounded-md shadow-md">
-				<div className="absolute top-3 left-16 z-[1000] w-64">
-					<Combobox data={comboboxData} placeholder="Seleziona una sede" />
-				</div>
-				<div className="absolute top-4 right-4 z-[1000]">
-					<Accordion type="single" collapsible className="w-64">
-						<AccordionItem value="list" className="border-none">
-							<AccordionTrigger className="py-2 px-4 bg-white rounded-t-md shadow-sm hover:bg-gray-50">
-								<p className="flex flex-row items-center gap-2">
-									<MenuIcon size={14} />
+				{!isMobile && (
+					<>
+						<div className="absolute top-3 left-16 z-[1000] w-64">
+							<Combobox data={comboboxData} placeholder="Seleziona una sede" />
+						</div>
+						<div className="absolute top-4 right-4 z-[1000]">
+							<Accordion type="single" collapsible className="w-64">
+								<AccordionItem value="list" className="border-none">
+									<AccordionTrigger className="py-2 px-4 bg-white rounded-t-md shadow-sm hover:bg-gray-50">
+										<p className="flex flex-row items-center gap-2">
+											<MenuIcon size={14} />
+											Contatti
+										</p>
+									</AccordionTrigger>
+									<AccordionContent className="mt-1 bg-muted rounded-md shadow-lg p-8">
+										<List data={contacts} />
+									</AccordionContent>
+								</AccordionItem>
+							</Accordion>
+						</div>
+					</>
+				)}
+
+				{isMobile && (
+					<div className="absolute bottom-7 left-1/2 transform -translate-x-1/2 z-[1000] flex space-x-2">
+						<DropdownMenu>
+							<DropdownMenuTrigger asChild>
+								<Button variant="secondary">
+									<MapPinIcon className="mr-2 h-4 w-4" />
+									Sedi
+								</Button>
+							</DropdownMenuTrigger>
+							<DropdownMenuContent
+								side={"top"}
+								align={"center"}
+								className="w-56 z-[1005]"
+							>
+								{comboboxData.map((item) => (
+									<DropdownMenuItem key={item.value} onSelect={item.action}>
+										{item.label}
+									</DropdownMenuItem>
+								))}
+							</DropdownMenuContent>
+						</DropdownMenu>
+						<DropdownMenu>
+							<DropdownMenuTrigger asChild>
+								<Button variant="secondary">
+									<MenuIcon className="mr-2 h-4 w-4" />
 									Contatti
-								</p>
-							</AccordionTrigger>
-							<AccordionContent className="mt-1 bg-muted rounded-md shadow-lg p-8">
-								<List data={contacts} />
-							</AccordionContent>
-						</AccordionItem>
-					</Accordion>
-				</div>
+								</Button>
+							</DropdownMenuTrigger>
+							<DropdownMenuContent
+								side={"top"}
+								align={"center"}
+								className="w-56 z-[1005]"
+							>
+								<DropdownMenuItem className={"py-4"} key={nanoid()}>
+									<List data={contacts} />
+								</DropdownMenuItem>
+							</DropdownMenuContent>
+						</DropdownMenu>
+					</div>
+				)}
+
 				<MapContainer
 					className="h-full w-full rounded-md"
 					center={coordinates}

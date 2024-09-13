@@ -7,6 +7,7 @@ import { defineConfig } from "vite";
 export default defineConfig({
 	assetsInclude: ["src/assets/images/**/*"],
 	base: "/gc-landing-page/",
+
 	plugins: [
 		react(),
 		TanStackRouterVite({

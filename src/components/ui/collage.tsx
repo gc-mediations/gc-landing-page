@@ -14,10 +14,10 @@ interface ImageWithId {
 	isPaused: boolean;
 }
 
-export function ImageCollage({
+export function Collage({
 	images,
 	cycleInterval = 5000,
-	orientation = "vertical",
+	orientation = "horizontal",
 }: ImageCollageProps) {
 	const [imageSlots, setImageSlots] = useState<ImageWithId[]>(() =>
 		images
@@ -25,6 +25,18 @@ export function ImageCollage({
 			.map((img) => ({ id: nanoid(), src: img, isPaused: false })),
 	);
 	const [recentlyUsed, setRecentlyUsed] = useState<string[]>([]);
+	const [isMobile, setIsMobile] = useState(false);
+
+	useEffect(() => {
+		const checkMobile = () => {
+			setIsMobile(window.innerWidth < 640); // Adjust this breakpoint as needed
+		};
+
+		checkMobile();
+		window.addEventListener("resize", checkMobile);
+
+		return () => window.removeEventListener("resize", checkMobile);
+	}, []);
 
 	useEffect(() => {
 		const intervalId = setInterval(() => {
@@ -91,13 +103,17 @@ export function ImageCollage({
 	};
 
 	const containerClass =
-		orientation === "vertical"
+		isMobile || orientation === "vertical"
 			? "grid grid-cols-1 gap-8"
 			: "grid grid-cols-3 gap-8";
 
 	return (
 		<div
-			className={`w-full mx-auto sm:pb-8 ${orientation === "vertical" ? "max-w-sm" : "max-w-3xl"}`}
+			className={`w-full mx-auto ${
+				isMobile || orientation === "vertical"
+					? "max-w-sm mb-8"
+					: "max-w-3xl sm:pb-8"
+			}`}
 		>
 			<div className={containerClass}>
 				{imageSlots.map((image, index) => (

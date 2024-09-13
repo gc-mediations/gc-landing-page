@@ -6,8 +6,9 @@ import collab_4 from "@/assets/photos/collab_4.jpeg";
 import collab_5 from "@/assets/photos/collab_5.jpeg";
 import greet from "@/assets/photos/greet.jpeg";
 import prize_0 from "@/assets/photos/prize_0.jpeg";
-import { ImageCollage } from "@/components/ui/collage.tsx";
+import { Collage } from "@/components/ui/collage.tsx";
 import { Greet } from "@/components/ui/greet";
+import { Separator } from "@/components/ui/separator.tsx";
 import { createLazyFileRoute } from "@tanstack/react-router";
 import { motion } from "framer-motion";
 
@@ -25,7 +26,7 @@ function Index() {
 			className="container mx-auto px-4"
 		>
 			<div className="flex flex-col items-center gap-4">
-				<div className="flex-1 border-b">
+				<div className="flex-1">
 					<Greet
 						image={greet}
 						title={"Piacere, Gaetano. Credit Specialist."}
@@ -35,13 +36,14 @@ function Index() {
 						action={{ link: "/about/", label: "Scopri di più" }}
 					/>
 				</div>
+				<Separator />
 				<div className={"text-center"}>
 					<p className={"font-bold text-4xl"}>Gallery</p>
 					<p className={"text-muted-foreground"}>
 						Interazione con clienti e collaboratori, sempre
 					</p>
 				</div>
-				<ImageCollage
+				<Collage
 					images={[
 						collab_0,
 						collab_1,
