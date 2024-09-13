@@ -26,9 +26,10 @@ function Index() {
 				<div className="flex-1 border-b">
 					<Greet
 						image={greet}
-						title={"Pluripremiato consulente del credito"}
+						title={"Piacere, Gaetano. Credit Specialist."}
 						description={
-							"Offro consulenza e assistenza per l'ottenimento di prestiti personali, prestiti auto, prestiti casa, prestiti per studenti, prestiti per imprese e molto altro. Contattami per una consulenza gratuita e senza impegno."
+							"Lavorare in 24MAX significa esprimere la mia indipendenza e competenza in un ambiente connesso con tanti agenti immobiliari”.\n" +
+							"Gaetano Castiglia credit specialist 24MAX di Catania, trova nella vicinanza al network RE/MAX un terreno fertile di sinergie ed opportunità. La possibilità di svilupparle e coglierle passa da un modello aziendale che informa e accresce strumenti e abilità del consulente del credito."
 						}
 						action={{ link: "/about/", label: "Scopri di più" }}
 					/>

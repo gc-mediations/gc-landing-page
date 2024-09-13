@@ -8,38 +8,23 @@ export const locations: Location[] = [
 		address: "REMAX Platinum: Via Cesare Beccaria, 67, 95123 Catania CT",
 	},
 	{
-		name: "Messina",
-		coordinates: [38.193813, 15.554015] as LatLngExpression,
-		address: "Messina Office Address",
+		name: "Paternò",
+		coordinates: [37.5666, 14.9] as LatLngExpression, // Approximate coordinates
+		address: "Parco Europa 35, Paternò",
 	},
 	{
-		name: "Siracusa",
-		coordinates: [37.075474, 15.286582] as LatLngExpression,
-		address: "Siracusa Office Address",
+		name: "Acireale",
+		coordinates: [37.6116, 15.1666] as LatLngExpression, // Approximate coordinates
+		address: "Corso Savoia 166, Acireale",
 	},
 	{
-		name: "Ragusa",
-		coordinates: [36.925092, 14.724319] as LatLngExpression,
-		address: "Ragusa Office Address",
+		name: "San Giovanni La Punta",
+		coordinates: [37.5833, 15.1] as LatLngExpression, // Approximate coordinates
+		address: "Via D. D'Aosta 29, San Giovanni La Punta",
 	},
 	{
-		name: "Agrigento",
-		coordinates: [37.309236, 13.576745] as LatLngExpression,
-		address: "Agrigento Office Address",
-	},
-	{
-		name: "Caltanissetta",
-		coordinates: [37.492591, 14.063187] as LatLngExpression,
-		address: "Caltanissetta Office Address",
-	},
-	{
-		name: "Enna",
-		coordinates: [37.567317, 14.27907] as LatLngExpression,
-		address: "Enna Office Address",
-	},
-	{
-		name: "Palermo",
-		coordinates: [38.115688, 13.361267] as LatLngExpression,
-		address: "Palermo Office Address",
+		name: "Caltagirone",
+		coordinates: [37.2333, 14.5167] as LatLngExpression, // Approximate coordinates
+		address: "Via M. della Via 19, Caltagirone",
 	},
 ];

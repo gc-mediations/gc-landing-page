@@ -1,6 +1,6 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { nanoid } from "nanoid";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 interface ImageCollageProps {
 	images: string[];
