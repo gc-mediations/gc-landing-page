@@ -17,7 +17,7 @@ function About() {
 			exit={{ opacity: 0 }}
 			transition={{ duration: 0.3 }}
 		>
-			<div className="w-full">
+			<div className="w-full border-b">
 				<Timeline
 					title={"Carriera"}
 					subtitle={"Con chi ho collaborato in passato"}

@@ -14,7 +14,7 @@ export const Route = createRootRoute({
 					<motion.div
 						transition={{ duration: 1.0 }}
 						whileHover={{ scale: 1.001 }}
-						className="bg-muted rounded-md px-8 h-full overflow-auto"
+						className="bg-muted rounded-md px-8 h-full overflow-auto shadow-md"
 					>
 						<Outlet />
 					</motion.div>{" "}

@@ -12,7 +12,7 @@ interface GreetProps {
 
 export const Greet = ({ title, description, action, image }: GreetProps) => {
 	return (
-		<div className="container mx-auto px-4 py-12 md:py-24 grid grid-cols-1 md:grid-cols-2 gap-8">
+		<div className="container mx-auto px-4 pt-4 pb-4 md:pt-8 md:pb-8 grid grid-cols-1 md:grid-cols-2 gap-8">
 			<div className="flex items-center justify-center">
 				<img
 					src={image}

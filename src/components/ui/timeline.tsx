@@ -120,9 +120,19 @@ export const Timeline: React.FC<TimelineProps> = ({
 										<div className="text-sm font-medium text-primary">
 											{landmark.date}
 										</div>
-										<p className="text-4xl font-bold text-center">
-											{landmark.title}
-										</p>
+										{landmark.logo ? (
+											<img
+												src={landmark.logo}
+												alt={landmark.title}
+												className="w-auto h-20 rounded
+											overflow-hidden"
+											/>
+										) : (
+											<p className="text-4xl font-bold text-center">
+												{landmark.title}
+											</p>
+										)}
+
 										<p className="text-muted-foreground text-center">
 											{landmark.description}
 										</p>
