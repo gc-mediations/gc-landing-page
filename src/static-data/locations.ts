@@ -9,22 +9,22 @@ export const locations: Location[] = [
 	},
 	{
 		name: "Paternò",
-		coordinates: [37.5666, 14.9] as LatLngExpression, // Approximate coordinates
-		address: "Parco Europa 35, Paternò",
+		coordinates: [37.5666, 14.9] as LatLngExpression,
+		address: "Parco Europa 35, 95047 Paternò CT",
 	},
 	{
 		name: "Acireale",
-		coordinates: [37.6116, 15.1666] as LatLngExpression, // Approximate coordinates
-		address: "Corso Savoia 166, Acireale",
+		coordinates: [37.6116, 15.1666] as LatLngExpression,
+		address: "Corso Savoia 166, 95024 Acireale CT",
 	},
 	{
 		name: "San Giovanni La Punta",
-		coordinates: [37.5833, 15.1] as LatLngExpression, // Approximate coordinates
-		address: "Via D. D'Aosta 29, San Giovanni La Punta",
+		coordinates: [37.5833, 15.1] as LatLngExpression,
+		address: "Via D. D'Aosta 29, 95037 San Giovanni La Punta CT",
 	},
 	{
 		name: "Caltagirone",
-		coordinates: [37.2333, 14.5167] as LatLngExpression, // Approximate coordinates
-		address: "Via M. della Via 19, Caltagirone",
+		coordinates: [37.2333, 14.5167] as LatLngExpression,
+		address: "Via M. della Via 19, 95041 Caltagirone CT",
 	},
 ];

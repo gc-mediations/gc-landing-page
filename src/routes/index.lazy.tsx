@@ -37,7 +37,7 @@ function Index() {
 				<div className={"text-center"}>
 					<p className={"font-bold text-4xl"}>Gallery</p>
 					<p className={"text-muted-foreground"}>
-						Uno sguardo alla mia quotidianità
+						Interazione con clienti e collaboratori, sempre
 					</p>
 				</div>
 				<ImageCollage

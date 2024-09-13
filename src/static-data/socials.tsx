@@ -2,7 +2,7 @@ import type { Social } from "@/types/social.ts";
 
 export const socials: Social[] = [
 	{
-		label: "gaecastiglia@gmail.com",
+		label: "gaetano.castiglia@24max.it",
 		icon: (
 			// biome-ignore lint/a11y/noSvgWithoutTitle: <explanation>
 			<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -53,7 +53,7 @@ export const socials: Social[] = [
 		title: "Numero di telefono",
 	},
 	{
-		link: "https://facebook.com/acme",
+		link: "https://www.facebook.com/mediazionicastiglia",
 		icon: (
 			// biome-ignore lint/a11y/noSvgWithoutTitle: <explanation>
 			<svg

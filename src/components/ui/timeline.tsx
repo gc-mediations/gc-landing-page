@@ -1,6 +1,6 @@
 import type { Landmark } from "@/types/landmark";
 import { motion, useAnimation } from "framer-motion";
-import { ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
+import { ChevronLeft, ChevronRight, DotIcon } from "lucide-react";
 import { nanoid } from "nanoid";
 import type React from "react";
 import { useEffect, useRef } from "react";
@@ -83,7 +83,7 @@ export const Timeline: React.FC<TimelineProps> = ({
 	}, [controls]);
 
 	return (
-		<div className="w-full py-4 md:py-8">
+		<div className="w-full py-4 md:pb-8 md:pt-4">
 			<div className="space-y-8">
 				<div className="text-center">
 					{title && (
@@ -144,7 +144,7 @@ export const Timeline: React.FC<TimelineProps> = ({
 											custom={index}
 											className="flex-shrink-0 ml-8"
 										>
-											<ArrowRight size={24} className="text-primary" />
+											<DotIcon size={24} className="text-primary" />
 										</motion.div>
 									)}
 								</div>

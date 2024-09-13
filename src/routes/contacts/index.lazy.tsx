@@ -54,6 +54,7 @@ function Contacts() {
 		await navigator.clipboard.writeText(text);
 		toast({
 			title: "Indirizzo copiato negli appunti",
+			className: "zIndex-1000",
 		});
 	};
 

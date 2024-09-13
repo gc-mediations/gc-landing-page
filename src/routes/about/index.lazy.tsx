@@ -20,7 +20,7 @@ function About() {
 			<div className="w-full border-b">
 				<Timeline
 					title={"Carriera"}
-					subtitle={"Con chi ho collaborato in passato"}
+					subtitle={"La mia storia fino ad oggi"}
 					landmarks={landmarks}
 				/>
 			</div>
