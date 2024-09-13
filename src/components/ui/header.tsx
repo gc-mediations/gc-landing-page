@@ -8,8 +8,11 @@ export const Header = () => {
 	const location = useLocation();
 
 	return (
-		<header className="flex items-center justify-between bg-background px-4 py-1 shadow-md md:px-6 md:py-3 ">
-			<Link to={"/"} className="text-lg font-bold">
+		<header className="flex items-center justify-between bg-background px-4 py-1 shadow-md md:px-6 md:py-3">
+			<Link
+				to={"/"}
+				className="text-lg font-bold hover:scale-105 ease-in-out transition"
+			>
 				{/* biome-ignore lint/a11y/noSvgWithoutTitle: <explanation> */}
 				<svg
 					fill="#000000"

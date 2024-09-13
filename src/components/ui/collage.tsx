@@ -97,7 +97,7 @@ export function ImageCollage({
 
 	return (
 		<div
-			className={`w-full mx-auto ${orientation === "vertical" ? "max-w-sm" : "max-w-3xl"}`}
+			className={`w-full mx-auto sm:pb-8 ${orientation === "vertical" ? "max-w-sm" : "max-w-3xl"}`}
 		>
 			<div className={containerClass}>
 				{imageSlots.map((image, index) => (

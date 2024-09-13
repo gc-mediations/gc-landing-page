@@ -5,7 +5,7 @@ export const locations: Location[] = [
 	{
 		name: "Catania",
 		coordinates: [37.515832284824896, 15.077880215746394] as LatLngExpression,
-		address: "REMAX Platinum: Via Cesare Beccaria, 67, 95123 Catania CT",
+		address: "Via Cesare Beccaria, 67, 95123 Catania CT",
 	},
 	{
 		name: "Paternò",

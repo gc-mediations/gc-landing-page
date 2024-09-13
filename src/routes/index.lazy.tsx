@@ -1,9 +1,11 @@
-import collab_0 from "@/assets/images/collab_0.jpeg";
-import collab_1 from "@/assets/images/collab_1.jpeg";
-import collab_2 from "@/assets/images/collab_2.jpeg";
-import collab_3 from "@/assets/images/collab_3.jpeg";
-import collab_4 from "@/assets/images/collab_4.jpeg";
-import greet from "@/assets/images/greet.jpeg";
+import collab_0 from "@/assets/photos/collab_0.jpeg";
+import collab_1 from "@/assets/photos/collab_1.jpeg";
+import collab_2 from "@/assets/photos/collab_2.jpeg";
+import collab_3 from "@/assets/photos/collab_3.jpeg";
+import collab_4 from "@/assets/photos/collab_4.jpeg";
+import collab_5 from "@/assets/photos/collab_5.jpeg";
+import greet from "@/assets/photos/greet.jpeg";
+import prize_0 from "@/assets/photos/prize_0.jpeg";
 import { ImageCollage } from "@/components/ui/collage.tsx";
 import { Greet } from "@/components/ui/greet";
 import { createLazyFileRoute } from "@tanstack/react-router";
@@ -28,8 +30,7 @@ function Index() {
 						image={greet}
 						title={"Piacere, Gaetano. Credit Specialist."}
 						description={
-							"Lavorare in 24MAX significa esprimere la mia indipendenza e competenza in un ambiente connesso con tanti agenti immobiliari”.\n" +
-							"Gaetano Castiglia credit specialist 24MAX di Catania, trova nella vicinanza al network RE/MAX un terreno fertile di sinergie ed opportunità. La possibilità di svilupparle e coglierle passa da un modello aziendale che informa e accresce strumenti e abilità del consulente del credito."
+							"Come credit specialist 24MAX, trovo nel mio lavoro l'espressione perfetta della mia indipendenza e competenza. La sinergia con il network RE/MAX mi offre un ambiente fertile di opportunità, permettendomi di crescere professionalmente e di offrire un servizio sempre più completo."
 						}
 						action={{ link: "/about/", label: "Scopri di più" }}
 					/>
@@ -41,7 +42,15 @@ function Index() {
 					</p>
 				</div>
 				<ImageCollage
-					images={[collab_0, collab_1, collab_2, collab_3, collab_4]}
+					images={[
+						collab_0,
+						collab_1,
+						collab_2,
+						collab_3,
+						collab_4,
+						collab_5,
+						prize_0,
+					]}
 					orientation="horizontal"
 				/>
 			</div>

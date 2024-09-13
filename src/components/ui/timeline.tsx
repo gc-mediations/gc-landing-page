@@ -155,7 +155,7 @@ export const Timeline: React.FC<TimelineProps> = ({
 					<button
 						type={"button"}
 						onClick={() => scrollTimeline("left")}
-						className="absolute left-2 top-[115px] transform -translate-y-1/2 bg-white p-2 rounded-md shadow-md z-10"
+						className="absolute left-2 top-[133px] transform -translate-y-1/2 bg-white p-2 rounded-md shadow-md z-10"
 						aria-label="Scroll left"
 					>
 						<ChevronLeft size={24} />
@@ -164,7 +164,7 @@ export const Timeline: React.FC<TimelineProps> = ({
 					<button
 						type={"button"}
 						onClick={() => scrollTimeline("right")}
-						className="absolute right-2 top-[115px] transform -translate-y-1/2 bg-white p-2 rounded-md shadow-md z-10"
+						className="absolute right-2 top-[133px] transform -translate-y-1/2 bg-white p-2 rounded-md shadow-md z-10"
 						aria-label="Scroll right"
 					>
 						<ChevronRight size={24} />

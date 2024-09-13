@@ -1,4 +1,4 @@
-import marker from "@/assets/images/marker.svg";
+import marker from "@/assets/icons/marker.svg";
 import {
 	Accordion,
 	AccordionContent,
@@ -9,6 +9,7 @@ import { Combobox } from "@/components/ui/combobox.tsx";
 import List from "@/components/ui/list.tsx";
 import { Separator } from "@/components/ui/separator.tsx";
 import { toast } from "@/hooks/use-toast.ts";
+import { cn } from "@/lib/utils.ts";
 import { contacts } from "@/static-data/contacts.ts";
 import { locations } from "@/static-data/locations.ts";
 import { useMapStore } from "@/store/map-store.ts";
@@ -27,7 +28,7 @@ import {
 	useMap,
 } from "react-leaflet";
 
-export const Route = createLazyFileRoute("/contacts/")({
+export const Route = createLazyFileRoute("/location/")({
 	component: Contacts,
 });
 
@@ -64,8 +65,21 @@ function Contacts() {
 			animate={{ y: 0, opacity: 1 }}
 			exit={{ y: -100, opacity: 0 }}
 			transition={{ duration: 0.3 }}
-			className="p-6 h-full"
+			className="px-4 py-4 h-full relative"
 		>
+			<div
+				className={cn(
+					"absolute lg:top-8 sm:bottom-8 md:bottom-8 left-1/2 transform -translate-x-1/2 z-[1001] w-1/2",
+				)}
+			>
+				<div className="bg-white rounded-lg shadow-lg px-2 py-4 text-center">
+					<p className="font-bold text-2xl mb-1">Quale ufficio preferisci?</p>
+					<p className="text-muted-foreground text-sm">
+						Più sedi disponibili. Flessibilità e dinamicità garantite.
+					</p>
+				</div>
+			</div>
+
 			<div className="relative h-full bg-primary-foreground rounded-md shadow-md">
 				<div className="absolute top-3 left-16 z-[1000] w-64">
 					<Combobox data={comboboxData} placeholder="Seleziona una sede" />
@@ -74,12 +88,12 @@ function Contacts() {
 					<Accordion type="single" collapsible className="w-64">
 						<AccordionItem value="list" className="border-none">
 							<AccordionTrigger className="py-2 px-4 bg-white rounded-t-md shadow-sm hover:bg-gray-50">
-								<p className={"flex flex-row items-center gap-2"}>
+								<p className="flex flex-row items-center gap-2">
 									<MenuIcon size={14} />
 									Contatti
 								</p>
 							</AccordionTrigger>
-							<AccordionContent className="mt-1 bg-muted rounded-b-md shadow-lg p-8">
+							<AccordionContent className="mt-1 bg-muted rounded-md shadow-lg p-8">
 								<List data={contacts} />
 							</AccordionContent>
 						</AccordionItem>
@@ -109,13 +123,9 @@ function Contacts() {
 							key={location.name}
 							position={location.coordinates}
 						>
-							<Tooltip direction={"bottom"} className={"flex flex-col gap-2"}>
+							<Tooltip direction="bottom" className="flex flex-col gap-2">
 								<p>{location.address}</p> <Separator />
-								<p
-									className={
-										"text-center font-semibold flex flex-row items-center gap-2 justify-center"
-									}
-								>
+								<p className="text-center font-semibold flex flex-row items-center gap-2 justify-center">
 									<InfoIcon size={14} />
 									Clicca l'icona per copiare l'indirizzo
 								</p>

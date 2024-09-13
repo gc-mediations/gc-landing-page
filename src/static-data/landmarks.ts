@@ -1,9 +1,9 @@
-import max from "@/assets/images/24max.svg";
-import auxilia from "@/assets/images/auxilia.webp";
-import barclays from "@/assets/images/barclays.svg";
-import credipass from "@/assets/images/credipass.svg";
-import money360 from "@/assets/images/money360.png";
-import sdl from "@/assets/images/sdl.png";
+import max from "@/assets/logos/24max.svg";
+import auxilia from "@/assets/logos/auxilia.webp";
+import barclays from "@/assets/logos/barclays.svg";
+import credipass from "@/assets/logos/credipass.svg";
+import money360 from "@/assets/logos/money360.png";
+import sdl from "@/assets/logos/sdl.png";
 import type { Landmark } from "@/types/landmark.ts";
 
 export const landmarks: Landmark[] = [
