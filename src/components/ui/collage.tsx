@@ -1,3 +1,4 @@
+import { useIsMobile } from "@/hooks/use-is-mobile.ts";
 import { AnimatePresence, motion } from "framer-motion";
 import { nanoid } from "nanoid";
 import { useEffect, useState } from "react";
@@ -25,18 +26,7 @@ export function Collage({
 			.map((img) => ({ id: nanoid(), src: img, isPaused: false })),
 	);
 	const [recentlyUsed, setRecentlyUsed] = useState<string[]>([]);
-	const [isMobile, setIsMobile] = useState(false);
-
-	useEffect(() => {
-		const checkMobile = () => {
-			setIsMobile(window.innerWidth < 640); // Adjust this breakpoint as needed
-		};
-
-		checkMobile();
-		window.addEventListener("resize", checkMobile);
-
-		return () => window.removeEventListener("resize", checkMobile);
-	}, []);
+	const isMobile = useIsMobile();
 
 	useEffect(() => {
 		const intervalId = setInterval(() => {

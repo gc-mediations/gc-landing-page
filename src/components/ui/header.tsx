@@ -4,16 +4,31 @@ import {
 	DropdownMenuItem,
 	DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu.tsx";
+import { useIsMobile } from "@/hooks/use-is-mobile.ts";
 import { cn } from "@/lib/utils.ts";
-import { sections } from "@/static-data/sections.ts";
+import { sections } from "@/static-data/sections.tsx";
 import { Link, useLocation } from "@tanstack/react-router";
 import { MenuIcon } from "lucide-react";
 
 export const Header = () => {
 	const location = useLocation();
+	const isMobile = useIsMobile();
+
+	const isActive = (link: string) => {
+		if (link === "/") {
+			return (
+				location.pathname === "/gc-landing-page/" || location.pathname === "/"
+			);
+		}
+		return location.pathname.startsWith(`/gc-landing-page${link}`);
+	};
 
 	return (
-		<header className="flex items-center justify-between bg-background px-4 py-1 shadow-md md:px-6 md:py-3">
+		<header
+			className={cn(
+				"flex items-center justify-between bg-background px-4 py-2 shadow-md md:px-6 md:py-3",
+			)}
+		>
 			<Link
 				to={"/"}
 				className="text-lg font-bold hover:scale-105 ease-in-out transition"
@@ -46,48 +61,52 @@ export const Header = () => {
 				<span className="sr-only">Acme Inc</span>
 			</Link>
 			<nav className="hidden md:flex justify-center w-full">
-				<ul className="flex items-center space-x-6">
+				<ul className="flex items-center space-x-4">
 					{sections.map((section) => (
 						<li key={section.label}>
 							<Link
 								to={section.link}
 								className={cn(
-									location.pathname === section.link
+									isActive(section.link)
 										? "text-primary"
 										: "text-muted-foreground",
-									"text-sm font-medium transition-colors hover:text-primary",
+									"text-sm font-medium transition-colors hover:text-primary flex flex-row gap-2 items-center",
 								)}
 							>
+								{section.icon}
 								{section.label}
 							</Link>
 						</li>
 					))}
 				</ul>
 			</nav>
-			<div className="md:hidden">
-				<DropdownMenu>
-					<DropdownMenuTrigger asChild>
-						<MenuIcon className="h-6 w-6" />
-					</DropdownMenuTrigger>
-					<DropdownMenuContent align="end" className="w-36 z-[1005]">
-						{sections.map((section) => (
-							<DropdownMenuItem key={section.label}>
-								<Link
-									to={section.link}
-									className={cn(
-										location.pathname === section.link
-											? "text-primary"
-											: "text-foreground",
-										"w-full text-sm",
-									)}
-								>
-									{section.label}
-								</Link>
-							</DropdownMenuItem>
-						))}
-					</DropdownMenuContent>
-				</DropdownMenu>
-			</div>
+			{isMobile && (
+				<div>
+					<DropdownMenu>
+						<DropdownMenuTrigger className={"bg-muted p-1 rounded-md"} asChild>
+							<MenuIcon size={32} />
+						</DropdownMenuTrigger>
+						<DropdownMenuContent align="end" className="w-36 z-[1005]">
+							{sections.map((section) => (
+								<DropdownMenuItem key={section.label}>
+									<Link
+										to={section.link}
+										className={cn(
+											isActive(section.link)
+												? "text-primary"
+												: "text-muted-foreground",
+											"w-full text-xs flex flex-row items-center gap-2 hover:text-primary",
+										)}
+									>
+										{section.icon}
+										{section.label}
+									</Link>
+								</DropdownMenuItem>
+							))}
+						</DropdownMenuContent>
+					</DropdownMenu>
+				</div>
+			)}
 		</header>
 	);
 };

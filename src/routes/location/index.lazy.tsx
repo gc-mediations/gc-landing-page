@@ -15,6 +15,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import List from "@/components/ui/list";
 import { Separator } from "@/components/ui/separator";
+import { useIsMobile } from "@/hooks/use-is-mobile.ts";
 import { toast } from "@/hooks/use-toast";
 import { cn } from "@/lib/utils";
 import { contacts } from "@/static-data/contacts";
@@ -27,7 +28,7 @@ import type { LatLngExpression } from "leaflet";
 import L from "leaflet";
 import { InfoIcon, MapPinIcon, MenuIcon } from "lucide-react";
 import { nanoid } from "nanoid";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import {
 	MapContainer,
 	Marker,
@@ -52,16 +53,7 @@ function MapController({ center }: { center: LatLngExpression }) {
 
 function Contacts() {
 	const { coordinates, setCoordinates } = useMapStore();
-	const [isMobile, setIsMobile] = useState(false);
-
-	useEffect(() => {
-		const checkMobile = () => {
-			setIsMobile(window.innerWidth < 768);
-		};
-		checkMobile();
-		window.addEventListener("resize", checkMobile);
-		return () => window.removeEventListener("resize", checkMobile);
-	}, []);
+	const isMobile = useIsMobile();
 
 	const comboboxData = locations.map((location) => ({
 		label: location.name,
