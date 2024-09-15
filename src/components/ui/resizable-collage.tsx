@@ -4,8 +4,9 @@ import {
 	ResizablePanel,
 	ResizablePanelGroup,
 } from "@/components/ui/resizable";
-import { useIsMobile } from "@/hooks/use-is-mobile.ts";
-import { cn } from "@/lib/utils.ts";
+import { useIsMobile } from "@/hooks/use-is-mobile";
+import { cn } from "@/lib/utils";
+import { motion } from "framer-motion";
 import React, { useMemo, useState } from "react";
 
 interface ImageCollageProps {
@@ -14,7 +15,7 @@ interface ImageCollageProps {
 }
 
 const ResizableCollage = ({ images, columns = 3 }: ImageCollageProps) => {
-	const [selectedImage, setSelectedImage] = useState<string | null>(null);
+	const [selectedImage, setSelectedImage] = useState<string | null>("");
 	const isMobile = useIsMobile();
 
 	const rows = Math.ceil(images.length / columns);
@@ -47,7 +48,7 @@ const ResizableCollage = ({ images, columns = 3 }: ImageCollageProps) => {
 			direction="vertical"
 			className={cn(
 				isMobile ? "min-h-[190vh]" : "min-h-[100vh]",
-				" rounded-md hover:shadow-lg shadow-md transition-all ease-in-out",
+				"rounded-md hover:shadow-lg shadow-md transition-all ease-in-out",
 			)}
 		>
 			{imageGrid.map((row, rowIndex) => (
@@ -72,24 +73,42 @@ const ResizableCollage = ({ images, columns = 3 }: ImageCollageProps) => {
 									>
 										<Dialog>
 											<DialogTrigger asChild>
-												{/* biome-ignore lint/a11y/useKeyWithClickEvents: <explanation> */}
-												<img
-													src={image}
-													alt={`${rowIndex * columns + colIndex + 1}`}
-													className="w-full h-full object-cover cursor-pointer hover:opacity-80 hover:scale-105 transition-all ease-in-out"
-													onClick={() => setSelectedImage(image)}
-												/>
+												<motion.div
+													initial={{ opacity: 0 }}
+													whileInView={{ opacity: 1 }}
+													viewport={{ once: true }}
+													transition={{ duration: 0.5 }}
+													className="w-full h-full"
+												>
+													<motion.img
+														src={image}
+														alt={`${rowIndex * columns + colIndex + 1}`}
+														className="w-full h-full object-cover cursor-pointer hover:opacity-80 transition-all ease-in-out"
+														onClick={() => setSelectedImage(image)}
+														whileHover={{ scale: 1.05 }}
+														transition={{ type: "spring", stiffness: 300 }}
+													/>
+												</motion.div>
 											</DialogTrigger>
 											<DialogContent
-												className={isMobile ? "max-w-[375px]" : "max-w-[750px]"}
+												className={cn(
+													isMobile ? "max-w-[375px]" : "max-w-[750px]",
+													"rounded-md",
+												)}
 											>
-												<div className="relative">
-													<img
+												<motion.div
+													className="relative"
+													initial={{ opacity: 0, scale: 0.8 }}
+													animate={{ opacity: 1, scale: 1 }}
+													transition={{ duration: 0.3 }}
+												>
+													<motion.img
 														src={selectedImage || ""}
 														alt="Selected"
 														className="w-full h-auto max-h-[100vh] object-contain rounded-lg"
+														layoutId={selectedImage}
 													/>
-												</div>
+												</motion.div>
 											</DialogContent>
 										</Dialog>
 									</ResizablePanel>
