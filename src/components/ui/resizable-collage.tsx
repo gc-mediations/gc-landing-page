@@ -106,7 +106,7 @@ const ResizableCollage = ({ images, columns = 3 }: ImageCollageProps) => {
 														src={selectedImage || ""}
 														alt="Selected"
 														className="w-full h-auto max-h-[100vh] object-contain rounded-lg"
-														layoutId={selectedImage}
+														layoutId={`${selectedImage}`}
 													/>
 												</motion.div>
 											</DialogContent>
