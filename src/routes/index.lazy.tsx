@@ -33,7 +33,10 @@ function Index() {
 						description={
 							"Come credit specialist 24MAX, trovo nel mio lavoro l'espressione perfetta della mia indipendenza e competenza. La sinergia con il network RE/MAX mi offre un ambiente fertile di opportunità, permettendomi di crescere professionalmente e di offrire un servizio sempre più completo."
 						}
-						action={{ link: "/about/", label: "Scopri di più" }}
+						actions={[
+							{ link: "/about/", label: "Scopri di più" },
+							{ link: "/rewards/", label: "Riconoscimenti" },
+						]}
 					/>
 				</div>
 				<Separator />
