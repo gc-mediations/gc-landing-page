@@ -1,4 +1,4 @@
-import ImageCollage from "@/components/ui/image-collage.tsx";
+import ResizableCollage from "@/components/ui/resizable-collage.tsx";
 import { awards } from "@/static-data/awards.ts";
 import { createLazyFileRoute } from "@tanstack/react-router";
 import { motion } from "framer-motion";
@@ -16,7 +16,13 @@ function Awards() {
 			transition={{ duration: 0.3 }}
 			className="container mx-auto p-4"
 		>
-			<ImageCollage images={awards} />
+			<div className={"text-center pb-4"}>
+				<p className={"font-bold text-4xl"}>Ecco.</p>
+				<p className={"text-muted-foreground"}>
+					Costanza e determinazione vengono sempre premiati
+				</p>
+			</div>
+			<ResizableCollage images={awards} />
 		</motion.div>
 	);
 }

@@ -1,6 +1,6 @@
 import greet from "@/assets/photos/greet.jpeg";
-import { Collage } from "@/components/ui/collage.tsx";
 import { Greet } from "@/components/ui/greet";
+import ResizableCollage from "@/components/ui/resizable-collage.tsx";
 import { Separator } from "@/components/ui/separator.tsx";
 import { gallery } from "@/static-data/gallery.ts";
 import { createLazyFileRoute } from "@tanstack/react-router";
@@ -13,7 +13,7 @@ export const Route = createLazyFileRoute("/")({
 function Index() {
 	return (
 		<motion.div
-			className="flex flex-col items-center justify-center min-h-fit w-full"
+			className="flex flex-col items-center justify-center min-h-fit w-full pb-4"
 			initial={{ opacity: 0 }}
 			animate={{ opacity: 1 }}
 			exit={{ opacity: 0 }}
@@ -40,7 +40,7 @@ function Index() {
 						Interazione con clienti e collaboratori, sempre
 					</p>
 				</div>
-				<Collage images={gallery} orientation="horizontal" />
+				<ResizableCollage images={gallery} />
 			</div>
 		</motion.div>
 	);
