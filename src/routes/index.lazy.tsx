@@ -1,14 +1,8 @@
-import collab_0 from "@/assets/photos/collab_0.jpeg";
-import collab_1 from "@/assets/photos/collab_1.jpeg";
-import collab_2 from "@/assets/photos/collab_2.jpeg";
-import collab_3 from "@/assets/photos/collab_3.jpeg";
-import collab_4 from "@/assets/photos/collab_4.jpeg";
-import collab_5 from "@/assets/photos/collab_5.jpeg";
 import greet from "@/assets/photos/greet.jpeg";
-import prize_0 from "@/assets/photos/prize_0.jpeg";
 import { Collage } from "@/components/ui/collage.tsx";
 import { Greet } from "@/components/ui/greet";
 import { Separator } from "@/components/ui/separator.tsx";
+import { gallery } from "@/static-data/gallery.ts";
 import { createLazyFileRoute } from "@tanstack/react-router";
 import { motion } from "framer-motion";
 
@@ -19,11 +13,11 @@ export const Route = createLazyFileRoute("/")({
 function Index() {
 	return (
 		<motion.div
-			initial={{ y: 300, opacity: 0 }}
-			animate={{ y: 0, opacity: 1 }}
-			exit={{ y: -100, opacity: 0 }}
+			className="flex flex-col items-center justify-center min-h-fit w-full"
+			initial={{ opacity: 0 }}
+			animate={{ opacity: 1 }}
+			exit={{ opacity: 0 }}
 			transition={{ duration: 0.3 }}
-			className="container mx-auto px-4"
 		>
 			<div className="flex flex-col items-center gap-4">
 				<div className="flex-1">
@@ -35,7 +29,7 @@ function Index() {
 						}
 						actions={[
 							{ link: "/about/", label: "Scopri di più" },
-							{ link: "/rewards/", label: "Riconoscimenti" },
+							{ link: "/awards/", label: "Riconoscimenti" },
 						]}
 					/>
 				</div>
@@ -46,18 +40,7 @@ function Index() {
 						Interazione con clienti e collaboratori, sempre
 					</p>
 				</div>
-				<Collage
-					images={[
-						collab_0,
-						collab_1,
-						collab_2,
-						collab_3,
-						collab_4,
-						collab_5,
-						prize_0,
-					]}
-					orientation="horizontal"
-				/>
+				<Collage images={gallery} orientation="horizontal" />
 			</div>
 		</motion.div>
 	);

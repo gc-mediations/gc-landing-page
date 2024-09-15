@@ -71,9 +71,9 @@ function Contacts() {
 
 	return (
 		<motion.div
-			initial={{ y: 300, opacity: 0 }}
-			animate={{ y: 0, opacity: 1 }}
-			exit={{ y: -100, opacity: 0 }}
+			initial={{ opacity: 0 }}
+			animate={{ opacity: 1 }}
+			exit={{ opacity: 0 }}
 			transition={{ duration: 0.3 }}
 			className="px-4 py-4 h-full relative"
 		>
