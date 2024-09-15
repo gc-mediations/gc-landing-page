@@ -1,3 +1,4 @@
+import { useIsMobile } from "@/hooks/use-is-mobile.ts";
 import { motion, useAnimation, useMotionValue } from "framer-motion";
 import { nanoid } from "nanoid";
 import { type ReactNode, useEffect, useRef, useState } from "react";
@@ -21,12 +22,15 @@ export function InfiniteCarousel<T>({
 	const containerRef = useRef<HTMLDivElement>(null);
 	const x = useMotionValue(0);
 	const controls = useAnimation();
+	const isMobile = useIsMobile();
 
 	useEffect(() => {
-		setDuplicatedItems([...items, ...items]);
-	}, [items]);
+		setDuplicatedItems(isMobile ? items : [...items, ...items]);
+	}, [items, isMobile]);
 
 	useEffect(() => {
+		if (isMobile) return;
+
 		let lastTime = performance.now();
 		let animationId: number;
 		const totalWidth = duplicatedItems.length * (itemWidth + itemGap);
@@ -51,17 +55,32 @@ export function InfiniteCarousel<T>({
 				cancelAnimationFrame(animationId);
 			}
 		};
-	}, [x, controls, duplicatedItems.length, itemWidth, itemGap, scrollSpeed]);
+	}, [
+		x,
+		controls,
+		duplicatedItems.length,
+		itemWidth,
+		itemGap,
+		scrollSpeed,
+		isMobile,
+	]);
 
 	return (
-		<div className="w-full overflow-hidden" ref={containerRef}>
-			<motion.div className="flex py-4" style={{ x }} animate={controls}>
+		<div
+			className={`w-full ${isMobile ? "overflow-x-auto" : "overflow-hidden"}`}
+			ref={containerRef}
+		>
+			<motion.div
+				className="flex py-4"
+				style={isMobile ? {} : { x }}
+				animate={isMobile ? {} : controls}
+			>
 				{duplicatedItems.map((item, index) => (
 					<motion.div
 						key={`${nanoid()}-${index}`}
 						className="flex-shrink-0"
 						style={{ width: itemWidth, marginRight: itemGap }}
-						whileHover={{ scale: 1.01 }}
+						whileHover={{ scale: isMobile ? 1 : 1.01 }}
 					>
 						{renderItem(item, index)}
 					</motion.div>

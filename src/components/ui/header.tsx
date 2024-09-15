@@ -14,7 +14,7 @@ export const Header = () => {
 	const location = useLocation();
 	const isMobile = useIsMobile();
 
-	const isActive = (link: string) => {
+	const isCurrentPageActive = (link: string) => {
 		if (link === "/") {
 			return (
 				location.pathname === "/gc-landing-page/" || location.pathname === "/"
@@ -67,7 +67,7 @@ export const Header = () => {
 							<Link
 								to={section.link}
 								className={cn(
-									isActive(section.link)
+									isCurrentPageActive(section.link)
 										? "text-primary"
 										: "text-muted-foreground",
 									"text-sm font-medium transition-colors hover:text-primary flex flex-row gap-2 items-center",
@@ -92,7 +92,7 @@ export const Header = () => {
 									<Link
 										to={section.link}
 										className={cn(
-											isActive(section.link)
+											isCurrentPageActive(section.link)
 												? "text-primary"
 												: "text-muted-foreground",
 											"w-full text-xs flex flex-row items-center gap-2 hover:text-primary",
