@@ -2,6 +2,7 @@ import { Footer } from "@/components/ui/footer.tsx";
 import { Header } from "@/components/ui/header.tsx";
 import { Toaster } from "@/components/ui/toaster";
 import { Outlet, createRootRoute } from "@tanstack/react-router";
+import { TanStackRouterDevtools } from "@tanstack/router-devtools";
 import { AnimatePresence, motion } from "framer-motion";
 
 export const Route = createRootRoute({
@@ -21,7 +22,7 @@ export const Route = createRootRoute({
 			</main>
 			<Footer />
 			<Toaster />
-			{/*<TanStackRouterDevtools />*/}
+			<TanStackRouterDevtools />
 		</div>
 	),
 });
