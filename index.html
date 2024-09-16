@@ -1,35 +1,46 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
-          integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
-          crossorigin=""/>
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
-            integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
-            crossorigin="">
-    </script>
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+        crossorigin=""/>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+          integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+          crossorigin="">
+  </script>
 
-<!--    <script type="text/javascript">-->
-<!--      (function(l) {-->
-<!--        if (l.search[1] === '/') {-->
-<!--          var decoded = l.search.slice(1).split('&').map(function(s) {-->
-<!--            return s.replace(/~and~/g, '&')-->
-<!--          }).join('?');-->
-<!--          var newUrl = l.pathname.slice(0, -1) + decoded + l.hash;-->
-<!--          if (newUrl !== l.pathname + l.search + l.hash) {-->
-<!--            window.history.replaceState(null, null, newUrl);-->
-<!--          }-->
-<!--        }-->
-<!--      }(window.location))-->
-<!--    </script>-->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Gaetano Castiglia - Credit Specialist</title>
-    <script type="module" crossorigin src="/assets/index-B9okAVf3.js"></script>
-    <link rel="stylesheet" crossorigin href="/assets/index-BPvOvShx.css">
-  </head>
-  <body>
-    <div id="root"></div>
-  </body>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gaetano Castiglia - Credit Specialist</title>
+
+  <!-- Add this script just before the closing   <script type="module" crossorigin src="/assets/index-B9okAVf3.js"></script>
+   <link rel="stylesheet" crossorigin href="/assets/index-BPvOvShx.css">
+ </head> tag -->
+  <script type="text/javascript">
+    // Single Page Apps for GitHub Pages
+    // MIT License
+    // https://github.com/rafgraph/spa-github-pages
+    // This script checks to see if a redirect is present in the query string,
+    // converts it back into the correct url and adds it to the
+    // browser's history using window.history.replaceState(...),
+    // which won't cause the browser to attempt to load the new url.
+    // When the single page app is loaded further down in this file,
+    // the correct url will be waiting in the browser's history for
+    // the single page app to route accordingly.
+    (function(l) {
+      if (l.search[1] === '/' ) {
+        var decoded = l.search.slice(1).split('&').map(function(s) {
+          return s.replace(/~and~/g, '&')
+        }).join('?');
+        window.history.replaceState(null, null,
+                l.pathname.slice(0, -1) + decoded + l.hash
+        );
+      }
+    }(window.location))
+  </script>
+</head>
+<body>
+<div id="root"></div>
+</body>
 </html>
