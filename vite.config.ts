@@ -6,8 +6,7 @@ import { defineConfig } from "vite";
 // https://vitejs.dev/config/
 export default defineConfig({
 	assetsInclude: ["src/assets/images/**/*"],
-	base: "/gc-landing-page/",
-
+	// base: "/",
 	plugins: [
 		react(),
 		TanStackRouterVite({

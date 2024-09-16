@@ -7,7 +7,7 @@ import { routeTree } from "./routeTree.gen";
 
 const router = createRouter({
 	routeTree: routeTree,
-	basepath: "/gc-landing-page/",
+	basepath: "/",
 });
 
 declare module "@tanstack/react-router" {
