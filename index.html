@@ -13,17 +13,14 @@
 
     <script type="text/javascript">
       (function(l) {
-        if (l.pathname.split('/').length > 2) {
-          const segments = l.pathname.split('/');
-          const newPath = '/' + segments.slice(2).join('/');
-          let newUrl = l.protocol + '//' + l.hostname + (l.port ? ':' + l.port : '') + newPath;
-          if (l.search && l.search.startsWith('?/')) {
-            newUrl += l.search.slice(2);
+        if (l.search[1] === '/') {
+          var decoded = l.search.slice(1).split('&').map(function(s) {
+            return s.replace(/~and~/g, '&')
+          }).join('?');
+          var newUrl = l.pathname.slice(0, -1) + decoded + l.hash;
+          if (newUrl !== l.pathname + l.search + l.hash) {
+            window.history.replaceState(null, null, newUrl);
           }
-          if (l.hash) {
-            newUrl += l.hash;
-          }
-          window.history.replaceState(null, null, newUrl);
         }
       }(window.location))
     </script>
