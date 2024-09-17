@@ -64,7 +64,7 @@ function Contacts() {
 	const handleCopy = async (text: string) => {
 		await navigator.clipboard.writeText(text);
 		toast({
-			title: "Indirizzo copiato negli appunti",
+			title: "Copiato negli appunti!",
 			className: "zIndex-1000",
 		});
 	};
@@ -75,7 +75,7 @@ function Contacts() {
 			animate={{ opacity: 1 }}
 			exit={{ opacity: 0 }}
 			transition={{ duration: 0.3 }}
-			className="px-4 py-4 h-full relative"
+			className="px-4 py-4 h-full relative z-0"
 		>
 			<div
 				className={cn(
@@ -146,9 +146,9 @@ function Contacts() {
 							<DropdownMenuContent
 								side={"top"}
 								align={"center"}
-								className="w-56 z-[1005]"
+								className="w-full z-[1005]"
 							>
-								<DropdownMenuItem className={"py-4"} key={nanoid()}>
+								<DropdownMenuItem className={"p-4"} key={nanoid()}>
 									<List data={contacts} />
 								</DropdownMenuItem>
 							</DropdownMenuContent>
@@ -157,7 +157,7 @@ function Contacts() {
 				)}
 
 				<MapContainer
-					className="h-full w-full rounded-md"
+					className="h-full w-full rounded-md z-0"
 					center={coordinates}
 					zoom={13}
 					scrollWheelZoom
@@ -165,6 +165,7 @@ function Contacts() {
 					<TileLayer
 						attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
 						url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+						className={"z-0"}
 					/>
 					{locations.map((location: Location) => (
 						<Marker
@@ -181,11 +182,16 @@ function Contacts() {
 							position={location.coordinates}
 						>
 							<Tooltip direction="bottom" className="flex flex-col gap-2">
-								<p>{location.address}</p> <Separator />
-								<p className="text-center font-semibold flex flex-row items-center gap-2 justify-center">
-									<InfoIcon size={14} />
-									Clicca l'icona per copiare l'indirizzo
-								</p>
+								<p>{location.address}</p>
+								{!isMobile && (
+									<>
+										<Separator />
+										<p className="text-center font-semibold flex flex-row items-center gap-2 justify-center">
+											<InfoIcon size={14} />
+											Clicca l'icona per copiare l'indirizzo
+										</p>
+									</>
+								)}
 							</Tooltip>
 						</Marker>
 					))}
