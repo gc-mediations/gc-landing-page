@@ -44,7 +44,7 @@ export const Footer = () => {
 	};
 
 	const handleDragEnd = (
-		event: MouseEvent | TouchEvent | PointerEvent,
+		_event: MouseEvent | TouchEvent | PointerEvent,
 		info: PanInfo,
 	) => {
 		if (info.offset.y < -50 && !isOpen) {
