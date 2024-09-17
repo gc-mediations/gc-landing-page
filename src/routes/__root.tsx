@@ -9,6 +9,7 @@ import { AnimatePresence, motion } from "framer-motion";
 export const Route = createRootRoute({
 	component: () => {
 		const isMobile = useIsMobile();
+
 		return (
 			<div className="h-screen flex flex-col">
 				<Header />
@@ -28,12 +29,11 @@ export const Route = createRootRoute({
 							)}
 						>
 							<Outlet />
-						</motion.div>{" "}
+						</motion.div>
 					</AnimatePresence>
 				</main>
 				<Footer />
 				<Toaster />
-				{/*<TanStackRouterDevtools />*/}
 			</div>
 		);
 	},

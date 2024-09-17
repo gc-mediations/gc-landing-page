@@ -36,7 +36,11 @@ export const Footer = () => {
 	) => {
 		if (index === 0 || index === 1) {
 			if (!label) return;
-			await navigator.clipboard.writeText(label);
+			await navigator.clipboard.write([
+				new ClipboardItem({
+					"text/plain": new Blob([label], { type: "text/plain" }),
+				}),
+			]);
 			toast({
 				title: `${title} copiato/a! `,
 			});
@@ -56,7 +60,7 @@ export const Footer = () => {
 		_event: MouseEvent | TouchEvent | PointerEvent,
 		info: PanInfo,
 	) => {
-		if (info.offset.y > 100 && isOpen) {
+		if (info.offset.y > 50 && isOpen) {
 			setIsOpen(false);
 		}
 	};
@@ -152,6 +156,7 @@ export const Footer = () => {
 								className={
 									"flex flex-row items-center justify-center text-sm gap-2"
 								}
+								onClick={() => setIsOpen(false)}
 							>
 								<ChevronDownIcon size={24} className="text-muted-foreground" />
 								Scorri in basso per chiudere

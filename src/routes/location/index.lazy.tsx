@@ -5,14 +5,7 @@ import {
 	AccordionItem,
 	AccordionTrigger,
 } from "@/components/ui/accordion";
-import { Button } from "@/components/ui/button";
 import { Combobox } from "@/components/ui/combobox";
-import {
-	DropdownMenu,
-	DropdownMenuContent,
-	DropdownMenuItem,
-	DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
 import List from "@/components/ui/list";
 import { Separator } from "@/components/ui/separator";
 import { useIsMobile } from "@/hooks/use-is-mobile.ts";
@@ -26,8 +19,7 @@ import { createLazyFileRoute } from "@tanstack/react-router";
 import { motion } from "framer-motion";
 import type { LatLngExpression } from "leaflet";
 import L from "leaflet";
-import { InfoIcon, MapPinIcon, MenuIcon } from "lucide-react";
-import { nanoid } from "nanoid";
+import { InfoIcon, MenuIcon } from "lucide-react";
 import { useEffect } from "react";
 import {
 	MapContainer,
@@ -62,7 +54,11 @@ function Contacts() {
 	}));
 
 	const handleCopy = async (text: string) => {
-		await navigator.clipboard.writeText(text);
+		await navigator.clipboard.write([
+			new ClipboardItem({
+				"text/plain": new Blob([text], { type: "text/plain" }),
+			}),
+		]);
 		toast({
 			title: "Copiato negli appunti!",
 			className: "zIndex-1000",
@@ -113,47 +109,6 @@ function Contacts() {
 							</Accordion>
 						</div>
 					</>
-				)}
-
-				{isMobile && (
-					<div className="absolute bottom-16 left-1/2 transform -translate-x-1/2 z-[1000] flex space-x-2">
-						<DropdownMenu>
-							<DropdownMenuTrigger asChild>
-								<Button variant="secondary">
-									<MapPinIcon className="mr-2 h-4 w-4" />
-									Sedi
-								</Button>
-							</DropdownMenuTrigger>
-							<DropdownMenuContent
-								side={"top"}
-								align={"center"}
-								className="w-56 z-[1005]"
-							>
-								{comboboxData.map((item) => (
-									<DropdownMenuItem key={item.value} onSelect={item.action}>
-										{item.label}
-									</DropdownMenuItem>
-								))}
-							</DropdownMenuContent>
-						</DropdownMenu>
-						<DropdownMenu>
-							<DropdownMenuTrigger asChild>
-								<Button variant="secondary">
-									<MenuIcon className="mr-2 h-4 w-4" />
-									Contatti
-								</Button>
-							</DropdownMenuTrigger>
-							<DropdownMenuContent
-								side={"top"}
-								align={"center"}
-								className="w-full z-[1005]"
-							>
-								<DropdownMenuItem className={"p-4"} key={nanoid()}>
-									<List data={contacts} />
-								</DropdownMenuItem>
-							</DropdownMenuContent>
-						</DropdownMenu>
-					</div>
 				)}
 
 				<MapContainer

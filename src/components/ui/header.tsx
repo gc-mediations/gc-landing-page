@@ -2,22 +2,38 @@ import { Button } from "@/components/ui/button";
 import {
 	DropdownMenu,
 	DropdownMenuContent,
+	DropdownMenuItem,
+	DropdownMenuSeparator,
 	DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import List from "@/components/ui/list.tsx";
+import { LocationHandler } from "@/components/ui/location-handler.tsx";
 import { useIsMobile } from "@/hooks/use-is-mobile";
 import { cn } from "@/lib/utils";
+import { contacts } from "@/static-data/contacts.ts";
+import { locations } from "@/static-data/locations.ts";
 import { sections } from "@/static-data/sections";
+import { useMapStore } from "@/store/map-store.ts";
 import { Link, useLocation } from "@tanstack/react-router";
+import { motion } from "framer-motion";
 import { MenuIcon } from "lucide-react";
+import { nanoid } from "nanoid";
 
 export const Header = () => {
 	const location = useLocation();
 	const isMobile = useIsMobile();
+	const { setCoordinates } = useMapStore();
+
+	const comboboxData = locations.map((location) => ({
+		label: location.name,
+		value: location.name,
+		action: () => setCoordinates(location.coordinates),
+	}));
 
 	const Logo = () => (
-		// biome-ignore lint/a11y/noSvgWithoutTitle: <explanation>
-		<div className={"flex flex-row items-center gap-2"}>
+		<motion.div className={"flex flex-row items-center gap-2"}>
 			{isMobile && <MenuIcon size={24} />}
+			{/* biome-ignore lint/a11y/noSvgWithoutTitle: <explanation> */}
 			<svg
 				fill="#000000"
 				version="1.1"
@@ -42,18 +58,26 @@ export const Header = () => {
 					</g>{" "}
 				</g>
 			</svg>
-		</div>
+		</motion.div>
 	);
 
 	if (isMobile) {
 		return (
-			<div className="fixed bottom-[45px] right-4 z-50">
+			<motion.div className="fixed bottom-[45px] right-4 z-50">
+				{isMobile && location.pathname === "/location" && (
+					<LocationHandler comboboxData={comboboxData} />
+				)}
 				<DropdownMenu>
 					<DropdownMenuTrigger className={"z-[1005]"} asChild>
 						<Button
 							variant={"outline"}
 							size="icon"
-							className="h-14 w-20 rounded-md shadow-lg z-[1005]"
+							className={cn(
+								"h-14 w-20 shadow-lg z-[1005]",
+								isMobile && location.pathname === "/location"
+									? "rounded-l-none rounded-r-md"
+									: "rounded-md",
+							)}
 						>
 							<Logo />
 						</Button>
@@ -62,6 +86,10 @@ export const Header = () => {
 						align="end"
 						className="w-56 p-2 bg-background shadow-lg rounded-lg z-[1005]"
 					>
+						<DropdownMenuItem className="py-2 px-4 bg-muted" key={nanoid()}>
+							<List data={contacts} />
+						</DropdownMenuItem>
+						<DropdownMenuSeparator />
 						{sections.map((section) => (
 							<Link
 								key={section.label}
@@ -80,7 +108,7 @@ export const Header = () => {
 						))}
 					</DropdownMenuContent>
 				</DropdownMenu>
-			</div>
+			</motion.div>
 		);
 	}
 

@@ -8,15 +8,20 @@ interface ListProps {
 
 export default function List({ data }: ListProps) {
 	const handleCopy = async (title: string, text: string) => {
-		await navigator.clipboard.writeText(text);
+		await navigator.clipboard.write([
+			new ClipboardItem({
+				"text/plain": new Blob([text], { type: "text/plain" }),
+			}),
+		]);
 		toast({
 			title: `${title} copiato/a!`,
 		});
 	};
 
 	return (
-		<div className="space-y-6">
+		<div className="space-y-3">
 			{data?.map((item) => (
+				// biome-ignore lint/a11y/useKeyWithClickEvents: <explanation>
 				<div
 					key={nanoid()}
 					className={

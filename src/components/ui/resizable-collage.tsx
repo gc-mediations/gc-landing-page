@@ -6,7 +6,6 @@ import {
 } from "@/components/ui/resizable";
 import { useIsMobile } from "@/hooks/use-is-mobile";
 import { cn } from "@/lib/utils";
-import { motion } from "framer-motion";
 import React, { useMemo, useState } from "react";
 
 interface ImageCollageProps {
@@ -73,22 +72,15 @@ const ResizableCollage = ({ images, columns = 3 }: ImageCollageProps) => {
 									>
 										<Dialog>
 											<DialogTrigger asChild>
-												<motion.div
-													initial={{ opacity: 0 }}
-													whileInView={{ opacity: 1 }}
-													viewport={{ once: true }}
-													transition={{ duration: 0.5 }}
-													className="w-full h-full"
-												>
-													<motion.img
+												<div className="w-full h-full animate-fadeIn">
+													{/* biome-ignore lint/a11y/useKeyWithClickEvents: <explanation> */}
+													<img
 														src={image}
 														alt={`${rowIndex * columns + colIndex + 1}`}
-														className="w-full h-full object-cover cursor-pointer hover:opacity-80 transition-all ease-in-out"
+														className="w-full h-full object-cover cursor-pointer hover:opacity-80 transition-all ease-in-out transform hover:scale-105 duration-300"
 														onClick={() => setSelectedImage(image)}
-														whileHover={{ scale: 1.05 }}
-														transition={{ type: "spring", stiffness: 300 }}
 													/>
-												</motion.div>
+												</div>
 											</DialogTrigger>
 											<DialogContent
 												className={cn(
@@ -96,19 +88,13 @@ const ResizableCollage = ({ images, columns = 3 }: ImageCollageProps) => {
 													"rounded-md",
 												)}
 											>
-												<motion.div
-													className="relative"
-													initial={{ opacity: 0, scale: 0.8 }}
-													animate={{ opacity: 1, scale: 1 }}
-													transition={{ duration: 0.3 }}
-												>
-													<motion.img
+												<div className="relative transform scale-95  animate-zoomIn">
+													<img
 														src={selectedImage || ""}
 														alt="Selected"
 														className="w-full h-auto max-h-[100vh] object-contain rounded-lg"
-														layoutId={`${selectedImage}`}
 													/>
-												</motion.div>
+												</div>
 											</DialogContent>
 										</Dialog>
 									</ResizablePanel>
