@@ -1,7 +1,9 @@
 import greet from "@/assets/photos/greet.jpeg";
+import Collage from "@/components/ui/collage.tsx";
 import { Greet } from "@/components/ui/greet";
 import ResizableCollage from "@/components/ui/resizable-collage.tsx";
 import { Separator } from "@/components/ui/separator.tsx";
+import { useIsMobile } from "@/hooks/use-is-mobile.ts";
 import { gallery } from "@/static-data/gallery.ts";
 import { createLazyFileRoute } from "@tanstack/react-router";
 import { motion } from "framer-motion";
@@ -11,6 +13,8 @@ export const Route = createLazyFileRoute("/")({
 });
 
 function Index() {
+	const isMobile = useIsMobile();
+
 	return (
 		<motion.div
 			className="flex flex-col items-center justify-center min-h-fit w-full pb-4"
@@ -40,7 +44,11 @@ function Index() {
 						Interazione con clienti e collaboratori, sempre
 					</p>
 				</div>
-				<ResizableCollage images={gallery} />
+				{isMobile ? (
+					<Collage images={gallery} />
+				) : (
+					<ResizableCollage images={gallery} />
+				)}
 			</div>
 		</motion.div>
 	);

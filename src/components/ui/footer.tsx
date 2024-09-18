@@ -18,7 +18,6 @@ import {
 } from "framer-motion";
 import { ChevronDownIcon, ChevronUpIcon, CopyIcon } from "lucide-react";
 import { nanoid } from "nanoid";
-import type { SetStateAction } from "react";
 import { useRef, useState } from "react";
 
 export const Footer = () => {
@@ -30,19 +29,19 @@ export const Footer = () => {
 	const opacity = useTransform(y, [-50, 0], [0, 1]);
 
 	const handleCopy = async (
-		index: SetStateAction<number>,
 		title: string | undefined,
 		label: string | undefined,
 	) => {
-		if (index === 0 || index === 1) {
-			if (!label) return;
-			await navigator.clipboard.write([
-				new ClipboardItem({
-					"text/plain": new Blob([label], { type: "text/plain" }),
-				}),
-			]);
+		if (!label) return;
+		try {
+			await navigator.clipboard.writeText(label);
 			toast({
 				title: `${title} copiato/a! `,
+			});
+		} catch (error) {
+			toast({
+				title: "Errore durante la copia negli appunti",
+				description: String(error),
 			});
 		}
 	};
@@ -77,7 +76,7 @@ export const Footer = () => {
 			{isMobile && <Separator className={"my-4"} />}
 			<div className={"w-full md:w-auto flex justify-end pr-3"}>
 				<div className={"grid grid-cols-5 gap-4 text-sm"}>
-					{socials.map((social, index) => (
+					{socials.map((social) => (
 						<motion.div
 							key={nanoid()}
 							whileHover={{ scale: 1.1 }}
@@ -89,7 +88,7 @@ export const Footer = () => {
 								onClick={() => {
 									social.link
 										? window.open(social.link)
-										: handleCopy(index, social.title, social.label);
+										: handleCopy(social.title, social.label);
 								}}
 							>
 								{social.icon}
@@ -101,7 +100,7 @@ export const Footer = () => {
 									className="absolute top-0 right-0 p-1 bg-white rounded-full shadow-md hover:bg-gray-100 cursor-pointer"
 									onClick={async (e) => {
 										e.stopPropagation();
-										await handleCopy(index, social.title, social.link);
+										await handleCopy(social.title, social.link);
 									}}
 								>
 									<CopyIcon size={8} />
@@ -134,7 +133,7 @@ export const Footer = () => {
 								className="w-full rounded-none flex items-center justify-center py-3"
 							>
 								<ChevronUpIcon className="mr-2" />
-								Scorri in alto o clicca per aprire
+								Scorri in alto o premi per aprire
 							</Button>
 						</motion.div>
 					</motion.div>
@@ -159,7 +158,7 @@ export const Footer = () => {
 								onClick={() => setIsOpen(false)}
 							>
 								<ChevronDownIcon size={24} className="text-muted-foreground" />
-								Scorri in basso per chiudere
+								Scorri in basso o premi per chiudere
 							</SheetTitle>
 						</SheetHeader>
 						<div className="mt-4 overflow-auto h-[calc(80vh-100px)]">

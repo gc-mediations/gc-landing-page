@@ -1,4 +1,6 @@
+import Collage from "@/components/ui/collage.tsx";
 import ResizableCollage from "@/components/ui/resizable-collage.tsx";
+import { useIsMobile } from "@/hooks/use-is-mobile.ts";
 import { awards } from "@/static-data/awards.ts";
 import { createLazyFileRoute } from "@tanstack/react-router";
 import { motion } from "framer-motion";
@@ -8,6 +10,7 @@ export const Route = createLazyFileRoute("/awards/")({
 });
 
 function Awards() {
+	const isMobile = useIsMobile();
 	return (
 		<motion.div
 			initial={{ opacity: 0 }}
@@ -22,7 +25,11 @@ function Awards() {
 					Costanza e determinazione vengono sempre premiati
 				</p>
 			</div>
-			<ResizableCollage images={awards} />
+			{isMobile ? (
+				<Collage images={awards} />
+			) : (
+				<ResizableCollage images={awards} />
+			)}
 		</motion.div>
 	);
 }

@@ -54,15 +54,18 @@ function Contacts() {
 	}));
 
 	const handleCopy = async (text: string) => {
-		await navigator.clipboard.write([
-			new ClipboardItem({
-				"text/plain": new Blob([text], { type: "text/plain" }),
-			}),
-		]);
-		toast({
-			title: "Copiato negli appunti!",
-			className: "zIndex-1000",
-		});
+		try {
+			await navigator.clipboard.writeText(text);
+			toast({
+				title: "Copiato negli appunti!",
+				className: "zIndex-1000",
+			});
+		} catch (error) {
+			toast({
+				title: "Errore durante la copia negli appunti",
+				description: String(error),
+			});
+		}
 	};
 
 	return (

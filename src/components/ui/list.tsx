@@ -8,14 +8,17 @@ interface ListProps {
 
 export default function List({ data }: ListProps) {
 	const handleCopy = async (title: string, text: string) => {
-		await navigator.clipboard.write([
-			new ClipboardItem({
-				"text/plain": new Blob([text], { type: "text/plain" }),
-			}),
-		]);
-		toast({
-			title: `${title} copiato/a!`,
-		});
+		try {
+			await navigator.clipboard.writeText(text);
+			toast({
+				title: `${title} copiato/a!`,
+			});
+		} catch (error) {
+			toast({
+				title: "Errore durante la copia negli appunti",
+				description: String(error),
+			});
+		}
 	};
 
 	return (
