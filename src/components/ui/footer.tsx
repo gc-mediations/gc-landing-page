@@ -1,4 +1,9 @@
 import { Button } from "@/components/ui/button";
+import {
+	Popover,
+	PopoverContent,
+	PopoverTrigger,
+} from "@/components/ui/popover.tsx";
 import { Separator } from "@/components/ui/separator";
 import {
 	Sheet,
@@ -9,6 +14,7 @@ import {
 } from "@/components/ui/sheet";
 import { useIsMobile } from "@/hooks/use-is-mobile";
 import { toast } from "@/hooks/use-toast";
+import { cn } from "@/lib/utils.ts";
 import { socials } from "@/static-data/socials";
 import {
 	type PanInfo,
@@ -16,7 +22,12 @@ import {
 	useMotionValue,
 	useTransform,
 } from "framer-motion";
-import { ChevronDownIcon, ChevronUpIcon, CopyIcon } from "lucide-react";
+import {
+	ChevronDownIcon,
+	ChevronUpIcon,
+	CopyIcon,
+	InfoIcon,
+} from "lucide-react";
 import { nanoid } from "nanoid";
 import { useRef, useState } from "react";
 
@@ -66,48 +77,85 @@ export const Footer = () => {
 
 	const FooterContent = () => (
 		<>
-			<div className="text-sm text-muted-foreground text-center md:text-left ">
-				<p>Mediazioni Gaetano Castiglia. </p>
-				<p>
-					Codice IVASS: E000366730 | Oam M447 |{" "}
-					<a href={"www.24max.it"}>24Max</a>
-				</p>
-			</div>
-			{isMobile && <Separator className={"my-4"} />}
-			<div className={"w-full md:w-auto flex justify-end pr-3"}>
-				<div className={"grid grid-cols-5 gap-4 text-sm"}>
-					{socials.map((social) => (
-						<motion.div
-							key={nanoid()}
-							whileHover={{ scale: 1.1 }}
-							className="relative"
-						>
-							{/* biome-ignore lint/a11y/useKeyWithClickEvents: <explanation> */}
-							<div
-								className="flex items-center justify-center gap-0.5 group hover:bg-gray-300 rounded-md p-2 opacity-70 hover:opacity-100 transition-all ease-in-out duration-300 hover:cursor-pointer"
-								onClick={() => {
-									social.link
-										? window.open(social.link)
-										: handleCopy(social.title, social.label);
-								}}
+			<Popover>
+				<div className={"flex flex-col items-center"}>
+					<PopoverTrigger className="bg-muted hover:border-gray-200 text-sm text-muted-foreground sm:text-center md:text-left">
+						<p className={"flex flex-row items-center gap-2"}>
+							<InfoIcon size={16} />
+							Mediatore Creditizio – OAM: M447 |{" "}
+							<a
+								href="https://www.24max.it"
+								target="_blank"
+								rel="noopener noreferrer"
+								className="text-blue-600 hover:underline"
 							>
-								{social.icon}
-							</div>
+								24Max
+							</a>
+						</p>
+					</PopoverTrigger>
+				</div>
 
-							{!social.link && (
-								// biome-ignore lint/a11y/useKeyWithClickEvents: <explanation>
+				<PopoverContent
+					align={isMobile ? "center" : "start"}
+					className={cn(isMobile ? "w-[300px]" : "w-[500px]", "text-sm p-4")}
+				>
+					Credit specialist di 24MAX S.p.A, mediatore creditizio iscritto al n.
+					M447 dell’elenco tenuto dall’Organismo degli Agenti e dei Mediatori.
+					Nello svolgimento della sua attività, 24 MAX SPA per tramite dei suoi
+					collaboratori pone in relazione gli istituti di credito con la
+					clientela per la concessione di finanziamenti. 24 MAX SPA agisce quale
+					mediatore convenzionato.
+					<Separator className={"my-2"} />
+					<div className={"flex flex-row"}>
+						<p className={"font-semibold"}>Codice IVASS</p>: E000366730.
+					</div>
+				</PopoverContent>
+			</Popover>
+			{isMobile && <Separator className={"my-4"} />}
+			<div
+				className={cn(
+					"w-full md:w-auto flex pr-3",
+					isMobile ? "justify-center pt-1" : "justify-end",
+				)}
+			>
+				<div className="border border-gray-300 rounded-md p-4 relative">
+					<span className="absolute -top-3 left-3 bg-muted px-2 text-sm font-semibold text-gray-600 rounded-md">
+						Social e contatti
+					</span>
+					<div className={"grid grid-cols-4 gap-4 text-sm"}>
+						{socials.map((social) => (
+							<motion.div
+								key={nanoid()}
+								whileHover={{ scale: 1.1 }}
+								className="relative"
+							>
+								{/* biome-ignore lint/a11y/useKeyWithClickEvents: <explanation> */}
 								<div
-									className="absolute top-0 right-0 p-1 bg-white rounded-full shadow-md hover:bg-gray-100 cursor-pointer"
-									onClick={async (e) => {
-										e.stopPropagation();
-										await handleCopy(social.title, social.link);
+									className="flex items-center justify-center gap-0.5 group hover:bg-gray-300 rounded-md p-2 opacity-70 hover:opacity-100 transition-all ease-in-out duration-300 hover:cursor-pointer"
+									onClick={() => {
+										social.link
+											? window.open(social.link)
+											: handleCopy(social.title, social.label);
 									}}
 								>
-									<CopyIcon size={8} />
+									{social.icon}
 								</div>
-							)}
-						</motion.div>
-					))}
+
+								{!social.link && (
+									// biome-ignore lint/a11y/useKeyWithClickEvents: <explanation>
+									<div
+										className="absolute top-0 right-0 p-1 bg-white rounded-full shadow-md hover:bg-gray-100 cursor-pointer"
+										onClick={async (e) => {
+											e.stopPropagation();
+											await handleCopy(social.title, social.link);
+										}}
+									>
+										<CopyIcon size={8} />
+									</div>
+								)}
+							</motion.div>
+						))}
+					</div>
 				</div>
 			</div>
 		</>
@@ -138,11 +186,7 @@ export const Footer = () => {
 						</motion.div>
 					</motion.div>
 				</SheetTrigger>
-				<SheetContent
-					side="bottom"
-					className="h-[22vh] overflow-hidden"
-					ref={sheetRef}
-				>
+				<SheetContent side="bottom" className="overflow-hidden" ref={sheetRef}>
 					<motion.div
 						drag="y"
 						dragConstraints={sheetRef}
@@ -161,7 +205,7 @@ export const Footer = () => {
 								Scorri in basso o premi per chiudere
 							</SheetTitle>
 						</SheetHeader>
-						<div className="mt-4 overflow-auto h-[calc(80vh-100px)]">
+						<div className="mt-4 overflow-auto">
 							<FooterContent />
 						</div>
 					</motion.div>

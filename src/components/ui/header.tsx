@@ -1,3 +1,9 @@
+import {
+	Accordion,
+	AccordionContent,
+	AccordionItem,
+	AccordionTrigger,
+} from "@/components/ui/accordion.tsx";
 import { Button } from "@/components/ui/button";
 import {
 	DropdownMenu,
@@ -7,7 +13,12 @@ import {
 	DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import List from "@/components/ui/list.tsx";
-import { LocationHandler } from "@/components/ui/location-handler.tsx";
+import LocationDropdown from "@/components/ui/location-handler.tsx";
+import {
+	Popover,
+	PopoverContent,
+	PopoverTrigger,
+} from "@/components/ui/popover.tsx";
 import { useIsMobile } from "@/hooks/use-is-mobile";
 import { cn } from "@/lib/utils";
 import { contacts } from "@/static-data/contacts.ts";
@@ -16,7 +27,7 @@ import { sections } from "@/static-data/sections";
 import { useMapStore } from "@/store/map-store.ts";
 import { Link, useLocation } from "@tanstack/react-router";
 import { motion } from "framer-motion";
-import { MenuIcon } from "lucide-react";
+import { ContactIcon, MenuIcon } from "lucide-react";
 import { nanoid } from "nanoid";
 
 export const Header = () => {
@@ -32,17 +43,16 @@ export const Header = () => {
 
 	const Logo = () => (
 		<motion.div className={"flex flex-row items-center gap-2"}>
-			{isMobile && <MenuIcon size={24} />}
+			{isMobile && <MenuIcon color={"white"} size={24} />}
 			{/* biome-ignore lint/a11y/noSvgWithoutTitle: <explanation> */}
 			<svg
-				fill="#000000"
+				fill={isMobile ? "white" : "black"}
 				version="1.1"
 				id="Capa_1"
 				xmlns="http://www.w3.org/2000/svg"
 				width="24"
 				height="24"
 				viewBox="0 0 532.065 532.065"
-				stroke="#000000"
 			>
 				<g id="SVGRepo_bgCarrier" stroke-width="0" />
 				<g
@@ -65,12 +75,15 @@ export const Header = () => {
 		return (
 			<motion.div className="fixed bottom-[45px] right-4 z-50">
 				{isMobile && location.pathname === "/location" && (
-					<LocationHandler comboboxData={comboboxData} />
+					<LocationDropdown comboboxData={comboboxData} />
 				)}
 				<DropdownMenu>
-					<DropdownMenuTrigger className={"z-[1005]"} asChild>
+					<DropdownMenuTrigger
+						className={"z-[1005] bg-primary shadow-xl"}
+						asChild
+					>
 						<Button
-							variant={"outline"}
+							variant={"default"}
 							size="icon"
 							className={cn(
 								"h-14 w-20 shadow-lg z-[1005]",
@@ -113,7 +126,7 @@ export const Header = () => {
 	}
 
 	return (
-		<header className="flex items-center justify-between bg-background px-4 py-2 shadow-md md:px-6 md:py-3">
+		<header className="flex items-center justify-between bg-background border-b px-4 py-2 shadow-md md:px-6 md:py-3">
 			<Link
 				to="/"
 				className="text-lg font-bold hover:scale-105 ease-in-out transition"
@@ -141,6 +154,20 @@ export const Header = () => {
 					))}
 				</ul>
 			</nav>
+			<motion.div className="absolute right-4">
+				<Popover>
+					<PopoverTrigger className="rounded-md bg-primary border-secondary-foreground items-center flex flex-row text-primary-foreground gap-2 py-1 text-sm hover:text-red-500 transition-colors ease-in-out">
+						<ContactIcon size={14} />
+						Contatti
+					</PopoverTrigger>
+					<PopoverContent
+						align={"end"}
+						className="absolute right-0 mt-1 bg-secondary rounded-md shadow-lg p-8 z-10"
+					>
+						<List data={contacts} />
+					</PopoverContent>
+				</Popover>
+			</motion.div>
 		</header>
 	);
 };

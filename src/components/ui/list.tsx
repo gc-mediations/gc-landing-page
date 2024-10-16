@@ -1,5 +1,6 @@
 import { toast } from "@/hooks/use-toast.ts";
-import { Copy } from "lucide-react";
+import { motion } from "framer-motion";
+import { CopyIcon } from "lucide-react";
 import { nanoid } from "nanoid";
 
 interface ListProps {
@@ -22,7 +23,7 @@ export default function List({ data }: ListProps) {
 	};
 
 	return (
-		<div className="space-y-3">
+		<motion.div className="space-y-3">
 			{data?.map((item) => (
 				// biome-ignore lint/a11y/useKeyWithClickEvents: <explanation>
 				<div
@@ -42,13 +43,13 @@ export default function List({ data }: ListProps) {
 					</div>
 					<div
 						className={
-							"absolute -top-1 -right-1 transition-opacity duration-300 ease-in-out"
+							"absolute -top-1 -right-1 transition-opacity bg-black rounded-full duration-300 p-1 ease-in-out"
 						}
 					>
-						<Copy size={16} />
+						<CopyIcon color={"white"} size={10} />
 					</div>
 				</div>
 			))}
-		</div>
+		</motion.div>
 	);
 }

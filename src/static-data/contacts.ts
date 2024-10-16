@@ -7,6 +7,6 @@ export const contacts: Contact[] = [
 	},
 	{
 		title: "Telefono",
-		content: "+39 393 072 7445",
+		content: "+39 334 105 8956",
 	},
 ];

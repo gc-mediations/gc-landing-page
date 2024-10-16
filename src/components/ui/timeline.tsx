@@ -95,7 +95,7 @@ export const Timeline: React.FC<TimelineProps> = ({
 						</h2>
 					)}
 					{subtitle && (
-						<p className="mt-2 text-sm md:text-base text-muted-foreground md:text-xl">
+						<p className="text-sm md:text-base text-muted-foreground md:text-xl">
 							{subtitle}
 						</p>
 					)}

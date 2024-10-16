@@ -1,4 +1,7 @@
+import { Button } from "@/components/ui/button.tsx";
+import { cn } from "@/lib/utils.ts";
 import { Link } from "@tanstack/react-router";
+import type { ReactNode } from "react";
 
 interface GreetProps {
 	title: string;
@@ -6,6 +9,17 @@ interface GreetProps {
 	actions?: {
 		label: string;
 		link: string;
+		size?: "sm" | "lg" | "default" | "icon" | null | undefined;
+		icon?: ReactNode;
+		variant?:
+			| "link"
+			| "default"
+			| "secondary"
+			| "destructive"
+			| "outline"
+			| "ghost"
+			| null
+			| undefined;
 	}[];
 	image: string;
 }
@@ -30,14 +44,20 @@ export const Greet = ({ title, description, actions, image }: GreetProps) => {
 					<p className="text-muted-foreground md:text-xl">{description}</p>
 				</div>
 
-				<div className={"flex flex-row gap-2 items-center"}>
+				<div className={cn("flex flex-row gap-2 items-center pt-4")}>
 					{actions?.map((action) => (
-						<Link
-							key={action.link}
-							to={action.link}
-							className="mt-4 inline-flex h-10 items-center justify-center rounded-md hover:text-red-500 bg-primary px-6 text-xs font-medium text-primary-foreground shadow transition-colors hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50"
-						>
-							{action.label}
+						<Link key={action.link} to={action.link}>
+							<Button
+								className={
+									"flex flex-row gap-2 hover:border-primary hover:text-red-500"
+								}
+								size={action.size || "default"}
+								variant={action.variant || "default"}
+							>
+								{" "}
+								{action.icon && action.icon}
+								{action.label}
+							</Button>
 						</Link>
 					))}
 				</div>

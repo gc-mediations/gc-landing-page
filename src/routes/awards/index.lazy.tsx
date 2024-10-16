@@ -17,19 +17,25 @@ function Awards() {
 			animate={{ opacity: 1 }}
 			exit={{ opacity: 0 }}
 			transition={{ duration: 0.3 }}
-			className="container mx-auto p-4"
+			className="container mx-auto pt-2"
 		>
-			<div className={"text-center pb-4"}>
-				<p className={"font-bold text-4xl"}>Ecco.</p>
-				<p className={"text-muted-foreground"}>
-					Costanza e determinazione vengono sempre premiati
-				</p>
+			<div
+				className={
+					"pb-8 px-8 bg-card rounded-md hover:shadow-md transition-shadow ease-in-out w-full"
+				}
+			>
+				<div className={"text-center py-4"}>
+					<p className={"font-bold text-3xl"}>Riconoscimenti</p>
+					<p className={"text-muted-foreground"}>
+						Cosa ho ottenuto nel corso degli anni
+					</p>
+				</div>
+				{isMobile ? (
+					<Collage images={awards} />
+				) : (
+					<ResizableCollage images={awards} />
+				)}
 			</div>
-			{isMobile ? (
-				<Collage images={awards} />
-			) : (
-				<ResizableCollage images={awards} />
-			)}
 		</motion.div>
 	);
 }

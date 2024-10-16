@@ -14,10 +14,7 @@ export const Route = createRootRoute({
 			<div className="h-screen flex flex-col">
 				<Header />
 				<main
-					className={cn(
-						"flex-1 w-full overflow-auto",
-						isMobile ? "pb-8" : "p-4",
-					)}
+					className={cn("flex-1 w-full overflow-auto", isMobile ? "pb-8" : "")}
 				>
 					<AnimatePresence>
 						<motion.div
@@ -25,14 +22,16 @@ export const Route = createRootRoute({
 							whileHover={{ scale: 1.001 }}
 							className={cn(
 								"bg-muted rounded-md h-full overflow-auto shadow-md",
-								isMobile ? "px-2" : "px-8",
+								isMobile ? "px-2" : "px-8 pb-4 pt-2",
 							)}
 						>
 							<Outlet />
 						</motion.div>
 					</AnimatePresence>
 				</main>
-				<Footer />
+				<div className={cn(!isMobile && "border-t")}>
+					<Footer />
+				</div>
 				<Toaster />
 			</div>
 		);
